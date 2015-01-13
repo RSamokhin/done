@@ -4,17 +4,18 @@ import java.io.PrintWriter;
 import java.net.URL;
 import java.net.MalformedURLException;
 import java.net.URLConnection;
-import java.util.HashMap;
-
 import org.json.*;
 
 public class main{
     public static void main (String[]args) throws IOException{
         Scanner in = new Scanner(System.in);
-        String surl = in.nextLine()+"?toc=1";
-        getJsonArray(surl,0,"HOME");
+        PrintWriter out = new PrintWriter(System.out);
+        String surl = "http://technet.microsoft.com/en-us/library/bb124558(v=exchg.150).aspx"+"?toc=1";//in.nextLine()+"?toc=1";
+        out.println("Home");
+        out.flush();
+        getJsonArray(surl,0);
     }
-    private static void getJsonArray(String surl,int depth,String title) throws MalformedURLException, IOException{
+    private static void getJsonArray(String surl,int depth) throws MalformedURLException, IOException{
         PrintWriter out = new PrintWriter(System.out);
         URL url = new URL(surl);
         URLConnection conn = url.openConnection();
@@ -23,22 +24,22 @@ public class main{
         while(sFromUrl.hasNextLine()){
             resultString.append(sFromUrl.nextLine());
         }
-        for (int i = 0 ; i < depth ; i++)
-            out.print("  ");
-        out.println(title);
-        try{
-            JSONArray jsonArray = new JSONArray(resultString.toString());
-            depth = depth+1;
-            if (depth<3)
-                for(int i = 0 ; i < jsonArray.length(); i++){
-                    String newUrl,newTitle;
-                    JSONObject json =  (JSONObject) jsonArray.get(i);
-                    newUrl = "http://technet.microsoft.com"+(String) json.get("Href")+"?toc=1";
-                    newTitle = (String) json.get("Title");
-                    getJsonArray(newUrl,depth,newTitle);
+        JSONArray jsonArray = new JSONArray(resultString.toString());
+        depth = depth+1;
+        if (depth<3)
+            for(int i = 0 ; i < jsonArray.length(); i++){
+                String newUrl,newTitle;
+                JSONObject json =  (JSONObject) jsonArray.get(i);
+                newUrl = "http://technet.microsoft.com"+(String) json.get("Href")+"?toc=1";
+                newTitle = (String) json.get("Title");
+                for (int j = 0 ; j < depth ; j++)
+                    out.print("  ");
+                out.println(newTitle);    
+                out.flush();
+                JSONObject extendedAttributes = (JSONObject) json.get("ExtendedAttributes");
+                if ("true".equals((String)extendedAttributes.get("data-tochassubtree")))
+                        getJsonArray(newUrl,depth);
                 }
-        }catch(JSONException | IOException e){}
-        out.flush();
     }
 }
 
