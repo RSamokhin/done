@@ -29,13 +29,14 @@ public class main{
         try{
             JSONArray jsonArray = new JSONArray(resultString.toString());
             depth = depth+1;
-            for(int i = 0 ; i < jsonArray.length(); i++){
-                String newUrl,newTitle;
-                JSONObject json =  (JSONObject) jsonArray.get(i);
-                newUrl = "http://technet.microsoft.com"+(String) json.get("Href")+"?toc=1";
-                newTitle = (String) json.get("Title");
-                getJsonArray(newUrl,depth,newTitle);
-            }
+            if (depth<3)
+                for(int i = 0 ; i < jsonArray.length(); i++){
+                    String newUrl,newTitle;
+                    JSONObject json =  (JSONObject) jsonArray.get(i);
+                    newUrl = "http://technet.microsoft.com"+(String) json.get("Href")+"?toc=1";
+                    newTitle = (String) json.get("Title");
+                    getJsonArray(newUrl,depth,newTitle);
+                }
         }catch(JSONException | IOException e){}
         out.flush();
     }
