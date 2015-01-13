@@ -5,12 +5,15 @@ import org.json.*;
 
 public class main{
     public static void main (String[]args) throws IOException{
+        long startTime = System.currentTimeMillis();
         Scanner in = new Scanner(System.in);
         PrintWriter out = new PrintWriter(System.out);
-        String surl = "http://technet.microsoft.com/en-us/library/aa991542.aspx"+"?toc=1";//in.nextLine()+"?toc=1";
+        String surl = "http://technet.microsoft.com/en-us/library/ff355324.aspx"+"?toc=1";//in.nextLine()+"?toc=1";
         out.println("Home");
+        getJsonArray(surl,0);
+        long endTime = System.currentTimeMillis();
+        out.println("That took " + (endTime - startTime) + " milliseconds");
         out.flush();
-        getJsonArray(surl,0);   
     }
     private static void getJsonArray(String surl,int depth) throws MalformedURLException, IOException{
         PrintWriter out = new PrintWriter(System.out);
@@ -27,7 +30,7 @@ public class main{
             for(int i = 0 ; i < jsonArray.length(); i++){
                 String newUrl,newTitle;
                 JSONObject json =  (JSONObject) jsonArray.get(i);
-                newUrl = "http://technet.microsoft.com"+(String) json.get("Href")+"?toc=1";
+                newUrl = "http://technet.microsoft.com"+(String) json.get("Href")+"?toc=1&"+Math.random();
                 newTitle = (String) json.get("Title");
                 for (int j = 0 ; j < depth ; j++)
                     out.print("  ");
