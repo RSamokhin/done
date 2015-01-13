@@ -1,19 +1,16 @@
-import java.io.IOException;
-import java.util.Scanner;
-import java.io.PrintWriter;
-import java.net.URL;
-import java.net.MalformedURLException;
-import java.net.URLConnection;
+import java.io.*;
+import java.util.*;
+import java.net.*;
 import org.json.*;
 
 public class main{
     public static void main (String[]args) throws IOException{
         Scanner in = new Scanner(System.in);
         PrintWriter out = new PrintWriter(System.out);
-        String surl = "http://technet.microsoft.com/en-us/library/bb124558(v=exchg.150).aspx"+"?toc=1";//in.nextLine()+"?toc=1";
+        String surl = "http://technet.microsoft.com/en-us/library/aa991542.aspx"+"?toc=1";//in.nextLine()+"?toc=1";
         out.println("Home");
         out.flush();
-        getJsonArray(surl,0);
+        getJsonArray(surl,0);   
     }
     private static void getJsonArray(String surl,int depth) throws MalformedURLException, IOException{
         PrintWriter out = new PrintWriter(System.out);
