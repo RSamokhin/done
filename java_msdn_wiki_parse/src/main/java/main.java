@@ -5,7 +5,7 @@ import java.net.URL;
 import java.net.MalformedURLException;
 import java.net.URLConnection;
 
-import org.json.JSONObject;
+import org.json.*;
 
 public class main{
     public static void main (String[]args)throws MalformedURLException, IOException{
@@ -19,7 +19,8 @@ public class main{
         while(sFromUrl.hasNextLine()){
             resultString.append(sFromUrl.nextLine());
         }
-        JSONObject json = new JSONObject(resultString);
+	JSONArray jsonArray = new JSONArray(resultString.toString());
+        
         
         out.flush();
     }
