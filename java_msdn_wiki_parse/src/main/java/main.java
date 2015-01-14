@@ -1,11 +1,13 @@
 import java.io.*;
+import static java.lang.System.out;
 import java.util.*;
 import java.net.*;
+import java.sql.SQLException;
 import org.json.*;
 
 public class main{
-    public static void main (String[]args) throws IOException{
-        long startTime = System.currentTimeMillis();
+    public static void main (String[]args) throws ClassNotFoundException, SQLException {
+        /*long startTime = System.currentTimeMillis();
         Scanner in = new Scanner(System.in);
         PrintWriter out = new PrintWriter(System.out);
         String surl = "http://technet.microsoft.com/en-us/library/ff355324.aspx"+"?toc=1";//in.nextLine()+"?toc=1";
@@ -13,7 +15,9 @@ public class main{
         getJsonArray(surl,0);
         long endTime = System.currentTimeMillis();
         out.println("That took " + (endTime - startTime) + " milliseconds");
-        out.flush();
+        out.flush();*/
+        BaseConnector connector = new BaseConnector();
+        out.println(connector.show());
     }
     private static void getJsonArray(String surl,int depth) throws MalformedURLException, IOException{
         PrintWriter out = new PrintWriter(System.out);
