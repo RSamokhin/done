@@ -1,3 +1,10 @@
+
+
+
+
+
+
+
 $('#MSOZoneCell_WebPartWPQ1').hide();
 var nspTable = $('<table/>').attr({
     'id': 'nspTable'
@@ -13,7 +20,7 @@ $.ajax({
     success: function(data) {
         var entriesArray = $(data).find('entry');
         entriesArray.sort((function(b, a) {
-            return new Date($(a).find('NspDate').html()) - new Date($(b).find('NspDate').html())
+            return new Date($(a).find('NspDate').html()) - new Date($(b).find('NspDate').html());
         }));
 
         for (var i = 0; i < entriesArray.length; i++) {
@@ -27,78 +34,102 @@ $.ajax({
                 'border-top': '1.5px solid seagreen',
                 'padding': '10px',
                 'width': '280px',
-                'height': '360px'
+                'height': '385px',
+                'position':'relative'
             }).attr({
                 'align': 'center'
             });
             newTd.appendTo($('.nspTr' + (Math.floor(i / 4))));
             try {
-                var nspLink = $(entry.find('content')).attr('src');
-                var nspNumber = entry.find('NspNumber').html();
-                var nspDate = new Date(entry.find('NspDate').html());
-                var nspPreview = entry.find('NspPreview').html();
+                var nspLink = entry.find('[type*="pdf"]').attr('src');
+                var nspNumber = '';
+                $(entry).find('[m\\:type*="Double"]').each(
+                        function(){
+                            if(~this.tagName.indexOf('NspNumber'))
+                                nspNumber=$(this)[0].textContent;
+                        }
+                );
+                var nspDate = new Date('05.05.1990');  //new Date(entry.find('NspDate').html());
+                $(entry).find('[m\\:type*="Date"]').each(
+                        function(){
+                            if(~this.tagName.indexOf('Date'))
+                                nspDate=new Date($(this)[0].textContent);
+                        }
+                );
+                var nspPreview = '';//entry.find('NspPreview').html();
+                $(entry[0].lastElementChild).children().each(function(){
+                    if (~this.tagName.indexOf('NspPreview'))
+                        nspPreview = ($(this).text().split(',').length>0)?$(this).text().split(',')[0]:$(this).text();
+                });
                 var mNames = new Array("Январь", "Февраль", "Март",
                     "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь",
                     "Октябрь", "Ноябрь", "Декабрь");
                 var numberDate = '№' + nspNumber + ' ' + mNames[nspDate.getUTCMonth()] + ' ' + nspDate.getUTCFullYear() + ' г.';
                 var numberDateDiv = $('<div/>').addClass('numberDate').html(numberDate).css({
-                    'text-align': 'center'
+                    'text-align': 'center',
+                    'position':'absolute',
+                    'top':'5px',
+                    'width':'100%'
                 });
                 var hr = $('<hr/>').addClass('nspHr').css({
-                    'margin': '10px'
+                    'margin': '10px',
+                    'position':'absolute',
+                    'top':'30px',
+                    'width':'90%'
                 });
-                var nspImage = $('<img/>').addClass('numberDate').attr({
+                var nspImage = $('<img/>').addClass('numberImage').attr({
                     'src': nspPreview,
                     'linkpdf': nspLink
                 }).css({
-                    'width': '250px'
+                    'width': '250px',
+                    'height': '345px',
+                    'position':'absolute',
+                    'top':'55px',
+                    'left':'15px',
+                    'cursor':'pointer'
                 });
                 numberDateDiv.appendTo($('.nspTd' + i));
                 hr.appendTo($('.nspTd' + i));
                 nspImage.appendTo($('.nspTd' + i));
                 nspImage.bind('click', function() {
-                    var linkpdf = ($(this).attr('linkpdf'));
-                    var pdfDiv = $('<div/>').attr({
-                        'id': 'pdfDiv'
-                    }).css({
-                        'height': '100%'
-                    });
-                    /*.css({
-                                                        'position': 'absolute',
-                                                        'border': '1px solid',
-                                                        'padding': '10px',
-                                                        'width': '70%',
-                                                        'height': '80%',
-                                                        'top': '10%',
-                                                        'left': '15%',
-                                                        'z-index': '100',
-                                                        'border-radius': '10px',
-                                                        'background-color': '#ffffff'
-                                                   });*/
-                    var pdf = new PDFObject({
-                        url: linkpdf,
-                        pdfOpenParams: {
-                            view: 'FitH'
-                        },
-                    });
-                    if (pdf) {
-                        pdfDiv.modal({
-                            modal: true,
-                            minWidht: '70%',
-                            minHeight: '80%'
+                    try{
+                        var linkpdf = ($(this).attr('linkpdf'));
+                        var pdfDiv = $('<div/>').attr({
+                            'id': 'pdfDiv'
+                        }).css({
+                            'height': '100%'
                         });
-                        pdf.embed('pdfDiv');
-                        $('.simplemodal-wrap').css({
-                            'overflow': 'hidden'
+                        var pdf = new PDFObject({
+                            url: linkpdf,
+                            pdfOpenParams: {
+                                view: 'FitBH'
+                            }
                         });
-                        $('#simplemodal-container').css({
-                            'left': '15%',
-                            'width': '70%',
-                            'top': '10%'
-                        });
+                        if (pdf) {
+                            pdfDiv.modal({
+                                modal: true,
+                                minWidht: '70%',
+                                minHeight: '80%'
+                            });
+                            pdf.embed('pdfDiv');
+                            $('.simplemodal-wrap').css({
+                                'overflow': 'hidden'
+                            });
+                            $('#simplemodal-container').css({
+                                'left': '15%',
+                                'width': '70%',
+                                'top': '10%'
+                            });
+                        }
+                    }catch(e){
+                        console.log('b '+e);
+                        var linkpdf = ($(this).attr('linkpdf'));
+                        location.replace(linkpdf);
                     }
                 });
-            } catch (e) {}
+            } catch (e) {
+                console.log('a '+ e);
+            }
         }
     },
     dataType: "xml"
@@ -555,7 +586,7 @@ var PDFObject = function(obj) {
             this.d.data.show();
             this.o.focus && this.focus();
             this.unbindEvents();
-            this.bindEvents()
+            this.bindEvents();
         },
         setContainerDimensions: function() {
             var a = m || r,
@@ -594,12 +625,12 @@ var PDFObject = function(obj) {
             this.d.container.css({
                 left: b,
                 top: a
-            })
+            });
         },
         watchTab: function(a) {
             if (0 < b(a.target).parents(".simplemodal-container").length) {
                 if (this.inputs = b(":input:enabled:visible:first, :input:enabled:visible:last", this.d.data[0]), !a.shiftKey && a.target === this.inputs[this.inputs.length - 1] || a.shiftKey && a.target === this.inputs[0] || 0 === this.inputs.length) a.preventDefault(), this.focus(a.shiftKey ? "last" : "first")
-            } else a.preventDefault(), this.focus()
+            } else a.preventDefault(), this.focus();
         },
         open: function() {
             this.d.iframe && this.d.iframe.show();
