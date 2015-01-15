@@ -1,10 +1,3 @@
-
-
-
-
-
-
-
 $('#MSOZoneCell_WebPartWPQ1').hide();
 var nspTable = $('<table/>').attr({
     'id': 'nspTable'
