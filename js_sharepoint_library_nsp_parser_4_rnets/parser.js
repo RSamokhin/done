@@ -13,7 +13,7 @@ $.ajax({
     success: function(data) {
         var entriesArray = $(data).find('entry');
         entriesArray.sort((function(b, a) {
-            return new Date($(a).find('NspDate').html()) - new Date($(b).find('NspDate').html());
+            return new Date($(b).find('NspDate').html()) - new Date($(a).find('NspDate').html());
         }));
 
         for (var i = 0; i < entriesArray.length; i++) {
@@ -38,26 +38,26 @@ $.ajax({
                 var nspNumber = '';
                 $(entry).find('[m\\:type*="Double"]').each(
                         function(){
-                            if(~this.tagName.indexOf('NspNumber'))
+                            if(~this.tagName.indexOf('РќРѕРјРµСЂР“Р°Р·РµС‚С‹'))
                                 nspNumber=$(this)[0].textContent;
                         }
                 );
                 var nspDate = new Date('05.05.1990');  //new Date(entry.find('NspDate').html());
                 $(entry).find('[m\\:type*="Date"]').each(
                         function(){
-                            if(~this.tagName.indexOf('Date'))
+                            if(~this.tagName.indexOf('РњРµСЃСЏС†Р“Р°Р·РµС‚С‹'))
                                 nspDate=new Date($(this)[0].textContent);
                         }
                 );
                 var nspPreview = '';//entry.find('NspPreview').html();
                 $(entry[0].lastElementChild).children().each(function(){
-                    if (~this.tagName.indexOf('NspPreview'))
+                    if (~this.tagName.indexOf('РЎСЃС‹Р»РєР°РќР°РР·РѕР±СЂР°Р¶РµРЅРёРµ'))
                         nspPreview = ($(this).text().split(',').length>0)?$(this).text().split(',')[0]:$(this).text();
                 });
-                var mNames = new Array("Январь", "Февраль", "Март",
-                    "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь",
-                    "Октябрь", "Ноябрь", "Декабрь");
-                var numberDate = '№' + nspNumber + ' ' + mNames[nspDate.getUTCMonth()] + ' ' + nspDate.getUTCFullYear() + ' г.';
+                var mNames = new Array("РЇРЅРІР°СЂСЊ", "Р¤РµРІСЂР°Р»СЊ", "РњР°СЂС‚",
+                    "РђРїСЂРµР»СЊ", "РњР°Р№", "РСЋРЅСЊ", "РСЋР»СЊ", "РђРІРіСѓСЃС‚", "РЎРµРЅС‚СЏР±СЂСЊ",
+                    "РћРєС‚СЏР±СЂСЊ", "РќРѕСЏР±СЂСЊ", "Р”РµРєР°Р±СЂСЊ");
+                var numberDate = 'в„–' + nspNumber + ' ' + mNames[nspDate.getUTCMonth()] + ' ' + nspDate.getUTCFullYear() + ' Рі.';
                 var numberDateDiv = $('<div/>').addClass('numberDate').html(numberDate).css({
                     'text-align': 'center',
                     'position':'absolute',
@@ -78,7 +78,7 @@ $.ajax({
                     'height': '345px',
                     'position':'absolute',
                     'top':'55px',
-                    'left':'15px',
+                    'left':'30px',
                     'cursor':'pointer'
                 });
                 numberDateDiv.appendTo($('.nspTd' + i));
