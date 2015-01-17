@@ -1,4 +1,3 @@
-
 import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -16,7 +15,4 @@ public class BaseConnector{
             password
         );
     }    
-    public String show(){
-        return "tet";
-    }
 }
