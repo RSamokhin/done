@@ -12,7 +12,7 @@ $.ajax({
     async: 'true',
     success: function(data) {
         var entriesArray = $(data).find('entry');
-        entriesArray.sort((function(b, a) {
+        entriesArray.cd jssort((function(b, a) {
             return new Date($(b).find('NspDate').html()) - new Date($(a).find('NspDate').html());
         }));
 
