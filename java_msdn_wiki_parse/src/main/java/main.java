@@ -1,8 +1,8 @@
 import java.io.*;
-import static java.lang.System.out;
 import java.util.*;
 import java.net.*;
 import java.sql.SQLException;
+import java.sql.Statement;
 import org.json.*;
 
 public class main{
@@ -17,6 +17,8 @@ public class main{
         out.println("That took " + (endTime - startTime) + " milliseconds");
         out.flush();*/
         BaseConnector connector = new BaseConnector();
+        BaseStatement statement = new BaseStatement(connector);
+        
     }
     private static void getJsonArray(String surl,int depth) throws MalformedURLException, IOException{
         PrintWriter out = new PrintWriter(System.out);
