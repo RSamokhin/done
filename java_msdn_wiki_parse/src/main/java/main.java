@@ -17,7 +17,6 @@ public class main{
         out.println("That took " + (endTime - startTime) + " milliseconds");
         out.flush();*/
         BaseConnector connector = new BaseConnector();
-        out.println(connector.show());
     }
     private static void getJsonArray(String surl,int depth) throws MalformedURLException, IOException{
         PrintWriter out = new PrintWriter(System.out);
