@@ -12,8 +12,8 @@ $.ajax({
     async: 'true',
     success: function(data) {
         var entriesArray = $(data).find('entry');
-        entriesArray.cd jssort((function(b, a) {
-            return new Date($(b).find('NspDate').html()) - new Date($(a).find('NspDate').html());
+        entriesArray.sort((function(b, a) {
+            return new Date($(a).find('[m\\:type*="Date"]').text()) - new Date($(b).find('[m\\:type*="Date"]').text());
         }));
 
         for (var i = 0; i < entriesArray.length; i++) {
@@ -36,28 +36,28 @@ $.ajax({
             try {
                 var nspLink = entry.find('[type*="pdf"]').attr('src');
                 var nspNumber = '';
-                $(entry).find('[m\\:type*="Double"]').each(
+                $(entry).find('*').each(
                         function(){
-                            if(~this.tagName.indexOf('РќРѕРјРµСЂР“Р°Р·РµС‚С‹'))
+                            if(~this.tagName.indexOf('НомерГазеты'))
                                 nspNumber=$(this)[0].textContent;
                         }
                 );
-                var nspDate = new Date('05.05.1990');  //new Date(entry.find('NspDate').html());
+                var nspDate = new Date('05.05.1990'); 
                 $(entry).find('[m\\:type*="Date"]').each(
                         function(){
-                            if(~this.tagName.indexOf('РњРµСЃСЏС†Р“Р°Р·РµС‚С‹'))
+                            if(~this.tagName.indexOf('МесяцГазеты'))
                                 nspDate=new Date($(this)[0].textContent);
                         }
                 );
                 var nspPreview = '';//entry.find('NspPreview').html();
                 $(entry[0].lastElementChild).children().each(function(){
-                    if (~this.tagName.indexOf('РЎСЃС‹Р»РєР°РќР°РР·РѕР±СЂР°Р¶РµРЅРёРµ'))
+                    if (~this.tagName.indexOf('СсылкаНаИзображение'))
                         nspPreview = ($(this).text().split(',').length>0)?$(this).text().split(',')[0]:$(this).text();
                 });
-                var mNames = new Array("РЇРЅРІР°СЂСЊ", "Р¤РµРІСЂР°Р»СЊ", "РњР°СЂС‚",
-                    "РђРїСЂРµР»СЊ", "РњР°Р№", "РСЋРЅСЊ", "РСЋР»СЊ", "РђРІРіСѓСЃС‚", "РЎРµРЅС‚СЏР±СЂСЊ",
-                    "РћРєС‚СЏР±СЂСЊ", "РќРѕСЏР±СЂСЊ", "Р”РµРєР°Р±СЂСЊ");
-                var numberDate = 'в„–' + nspNumber + ' ' + mNames[nspDate.getUTCMonth()] + ' ' + nspDate.getUTCFullYear() + ' Рі.';
+                var mNames = new Array("Январь", "Февраль", "Март",
+                    "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь",
+                    "Октябрь", "Ноябрь", "Декабрь");
+                var numberDate = '№' + nspNumber + ' ' + mNames[nspDate.getMonth()] + ' ' + nspDate.getFullYear() + ' г.';
                 var numberDateDiv = $('<div/>').addClass('numberDate').html(numberDate).css({
                     'text-align': 'center',
                     'position':'absolute',
