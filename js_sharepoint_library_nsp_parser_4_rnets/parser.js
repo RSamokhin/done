@@ -42,7 +42,7 @@ $.ajax({
                                 nspNumber=$(this)[0].textContent;
                         }
                 );
-                var nspDate = new Date('05.05.1990');  //new Date(entry.find('NspDate').html());
+                var nspDate = new Date('05.05.1990'); 
                 $(entry).find('[m\\:type*="Date"]').each(
                         function(){
                             if(~this.tagName.indexOf('МесяцГазеты'))
@@ -57,7 +57,7 @@ $.ajax({
                 var mNames = new Array("Январь", "Февраль", "Март",
                     "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь",
                     "Октябрь", "Ноябрь", "Декабрь");
-                var numberDate = '№' + nspNumber + ' ' + mNames[nspDate.getUTCMonth()] + ' ' + nspDate.getUTCFullYear() + ' г.';
+                var numberDate = '№' + nspNumber + ' ' + mNames[nspDate.getMonth()] + ' ' + nspDate.getFullYear() + ' г.';
                 var numberDateDiv = $('<div/>').addClass('numberDate').html(numberDate).css({
                     'text-align': 'center',
                     'position':'absolute',
