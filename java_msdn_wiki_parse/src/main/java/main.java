@@ -19,8 +19,8 @@ public class main{
                     "true",
                     "",
                     "http://technet.microsoft.com/en-us/library/ff355324.aspx");
-        //getJsonArray(surl,0);
         out.flush();
+        getJsonArray(surl,0);
         connector.close();
     }
     private static void insertData(BaseStatement statement, String pid,String title, String isparent, String parent, String href) throws SQLException{
@@ -58,10 +58,10 @@ public class main{
                 JSONObject extendedAttributes = (JSONObject) json.get("ExtendedAttributes");
                 BaseStatement statement = new BaseStatement(connector);
                 insertData(statement,
-                   StringUtils.substringBetween((String) json.get("Href"), "/", "."),
-                    newTitle,
+                    StringUtils.substringBetween(newUrl, "library/", ".aspx"),
+                    newTitle.replaceAll("'", ""),
                     ("true".equals((String)extendedAttributes.get("data-tochassubtree")))?"true":"false",
-                    "",
+                    StringUtils.substringBetween(surl, "library/", ".aspx"),
                     newUrl);
                 if ("true".equals((String)extendedAttributes.get("data-tochassubtree")))
                         getJsonArray(newUrl,depth);
