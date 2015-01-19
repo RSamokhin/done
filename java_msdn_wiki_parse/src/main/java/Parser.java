@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import org.apache.commons.lang.StringUtils;
 import org.json.*;
 
-public class main{
+public class Parser{
     private static BaseConnector connector = null;
     public static void main (String[]args) throws ClassNotFoundException, SQLException, IOException {
         PrintWriter out = new PrintWriter(System.out);
