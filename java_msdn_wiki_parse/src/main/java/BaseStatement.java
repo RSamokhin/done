@@ -7,17 +7,34 @@ public class BaseStatement {
        statement = connector.connection.createStatement();
     }
     public void makeQuery (String type, String table , String[] columns, String[][] cdata, String[] params) throws SQLException{
+        String query = null;
         switch (type){
             case "get":
                 combineSelectQuery(table,columns,cdata,params);
                 break;
             case "insert":
-                String query = combineInsertQuery(table,columns,params);
-                System.out.println(query);
+                query = combineInsertQuery(table,columns,params);
                 statement.executeUpdate(query);
                 statement.close();
-                break;    
+                break; 
+            case "delete":
+                query = combineDeleteQuery(table,cdata);
+                statement.executeUpdate(query);
+                statement.close();
+                break;
         }
+    }
+    private String combineDeleteQuery (String table,String[][]cdata){
+        StringBuilder query = new StringBuilder();
+        query.append("Delete from ");
+        query.append(table);
+        if (cdata.length>0){
+            query.append(" where ");
+            for (String[]cdatarow:cdata)
+                query.append(cdatarow[0]).append(cdatarow[1]).append("'").append(cdatarow[2]).append("'").append(" and ");
+            query.setLength(query.length()-4);
+        }
+        return query.toString();
     }
     private String combineSelectQuery (String table,String[]columns,String[][]cdata, String[] params){
         StringBuilder query = new StringBuilder();

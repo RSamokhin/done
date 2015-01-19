@@ -12,8 +12,9 @@ public class main{
         String surl = "http://technet.microsoft.com/en-us/library/ff355324.aspx"+"?toc=1";//in.nextLine()+"?toc=1";
         out.println("Home");
         connector = new BaseConnector();
-        BaseStatement statement = new BaseStatement(connector);
-        insertData(statement,
+        deleteData(connector,
+                   "ff355324");
+        insertData(connector,
                    "ff355324",
                     "Forefront Threat Management Gateway (TMG) 2010",
                     "true",
@@ -23,7 +24,8 @@ public class main{
         getJsonArray(surl,0);
         connector.close();
     }
-    private static void insertData(BaseStatement statement, String pid,String title, String isparent, String parent, String href) throws SQLException{
+    private static void insertData(BaseConnector connector, String pid,String title, String isparent, String parent, String href) throws SQLException{
+        BaseStatement statement = new BaseStatement(connector);
         String[]columns = {"pid","title","isparent","parent","href"};
         String[]params = new String[5];
         params[0] = pid;
@@ -33,6 +35,16 @@ public class main{
         params[4] = href;
         String[][]cdata = new String[0][0];
         statement.makeQuery("insert","done.done",columns,cdata,params);
+    };
+    private static void deleteData(BaseConnector connector,String pid) throws SQLException{
+        BaseStatement statement = new BaseStatement(connector);
+        String[]columns = {};
+        String[]params = {};
+        String[][]cdata = new String[1][3];
+        cdata[0][0]="pid";
+        cdata[0][1]="=";
+        cdata[0][2]=pid;        
+        statement.makeQuery("delete","done.done",columns,cdata,params);
     };
     private static void getJsonArray(String surl,int depth) throws MalformedURLException, IOException, SQLException{
         PrintWriter out = new PrintWriter(System.out);
@@ -57,7 +69,9 @@ public class main{
                 out.flush();
                 JSONObject extendedAttributes = (JSONObject) json.get("ExtendedAttributes");
                 BaseStatement statement = new BaseStatement(connector);
-                insertData(statement,
+                deleteData(connector,
+                    StringUtils.substringBetween(newUrl, "library/", ".aspx"));
+                insertData(connector,
                     StringUtils.substringBetween(newUrl, "library/", ".aspx"),
                     newTitle.replaceAll("'", ""),
                     ("true".equals((String)extendedAttributes.get("data-tochassubtree")))?"true":"false",

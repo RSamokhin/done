@@ -14,7 +14,6 @@ public class BaseConnector{
             password
         );
     }  
-
     void close() throws SQLException {
         connection.close();
     }
