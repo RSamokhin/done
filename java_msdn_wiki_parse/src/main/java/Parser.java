@@ -17,20 +17,19 @@ class MyThread extends Thread{
     private static String surl;
    
     public MyThread(){
-        this.pid =  "ff355324";
-        this.title = "Forefront Threat Management Gateway (TMG) 2010";
+        this.pid =  "aa991542";
+        this.title = "TechNet Library";
         this.isparent = "true";
         this.parent = "";
-        this.url = "http://technet.microsoft.com/en-us/library/ff355324.aspx";
-        this.surl = this.url+"?toc=1";
+        this.url = "http://technet.microsoft.com/en-us/library/aa991542.aspx";
+        
     }
-    public MyThread (String newPid,String newTitle,String newIsparent,String newParent,String newUrl,String newSurl){
+    public MyThread (String newPid,String newTitle,String newIsparent,String newParent,String newUrl){
         this.pid = newPid;
         this.title = newTitle;
         this.isparent = newIsparent;
         this.parent = newParent;
         this.url = newUrl;
-        this.surl = newSurl;
     }
     @Override
     public void run(){
@@ -47,7 +46,7 @@ class MyThread extends Thread{
                        parent,
                        url);
             out.flush();
-            getJsonArray(surl,0);
+            getJsonArray(url,0);
             connector.close();
         } catch (ClassNotFoundException | SQLException | IOException ex) {
             Logger.getLogger(MyThread.class.getName()).log(Level.SEVERE, null, ex);
@@ -77,34 +76,34 @@ class MyThread extends Thread{
     };
     private static void getJsonArray(String surl,int depth) throws MalformedURLException, IOException, SQLException{
         PrintWriter out = new PrintWriter(System.out);
-        URL murl = new URL(surl);
+        URL murl = new URL(surl+"?toc=1");
         URLConnection conn = murl.openConnection();
         Scanner sFromUrl = new Scanner(conn.getInputStream());
         StringBuilder resultString = new StringBuilder();
         while(sFromUrl.hasNextLine()){
             resultString.append(sFromUrl.nextLine());
         }
+        //System.out.println(surl);
         JSONArray jsonArray = new JSONArray(resultString.toString());
         depth = depth+1;
-        if (depth<3)
+        //if (depth<3)
             for(int i = 0 ; i < jsonArray.length(); i++){
                 String newUrl,newTitle;
                 JSONObject json =  (JSONObject) jsonArray.get(i);
-                newUrl = "http://technet.microsoft.com"+(String) json.get("Href")+"?toc=1&"+Math.random();
+                newUrl = "http://technet.microsoft.com"+(String) json.get("Href");
                 newTitle = (String) json.get("Title");
                 for (int j = 0 ; j < depth ; j++)
                     out.print("  ");
+                //out.print(Thread.activeCount());
                 out.println(newTitle);   
-                out.println(Thread.activeCount()); 
                 out.flush();
                 JSONObject extendedAttributes = (JSONObject) json.get("ExtendedAttributes");
                 String newPid = StringUtils.substringBetween(newUrl, "library/", ".aspx"),
                        newMyTitle = newTitle.replaceAll("'", ""), 
                        newIsparent = ("true".equals((String)extendedAttributes.get("data-tochassubtree")))?"true":"false",
-                       newParent = StringUtils.substringBetween(surl, "library/", ".aspx"),
-                       newStartUrl = newUrl;
-                if(Thread.activeCount()<20){
-                    MyThread p = new MyThread(newPid, newMyTitle, newIsparent, newParent, newStartUrl,newStartUrl+"?toc=1");
+                       newParent = StringUtils.substringBetween(surl, "library/", ".aspx");
+                if((Thread.activeCount()>20)&&(newIsparent.equals("true"))){
+                    MyThread p = new MyThread(newPid, newMyTitle, newIsparent, newParent, newUrl);
                     p.start();
                 }else{
                     BaseStatement statement = new BaseStatement(connector);
@@ -116,7 +115,7 @@ class MyThread extends Thread{
                                 newMyTitle,
                                 newIsparent,
                                 newParent,
-                                newStartUrl 
+                                newUrl 
                     );
                     if ("true".equals((String)extendedAttributes.get("data-tochassubtree")))
                             getJsonArray(newUrl,depth);
