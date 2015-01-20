@@ -2,27 +2,56 @@ import java.io.*;
 import java.util.*;
 import java.net.*;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.commons.lang.StringUtils;
 import org.json.*;
 
-public class Parser{
+class MyThread extends Thread{
     private static BaseConnector connector = null;
-    public static void main (String[]args) throws ClassNotFoundException, SQLException, IOException {
+    private static String pid;
+    private static String title;
+    private static String isparent;
+    private static String parent;
+    private static String url;
+    private static String surl;
+   
+    public MyThread(){
+        this.pid =  "ff355324";
+        this.title = "Forefront Threat Management Gateway (TMG) 2010";
+        this.isparent = "true";
+        this.parent = "";
+        this.url = "http://technet.microsoft.com/en-us/library/ff355324.aspx";
+        this.surl = this.url+"?toc=1";
+    }
+    public MyThread (String newPid,String newTitle,String newIsparent,String newParent,String newUrl,String newSurl){
+        this.pid = newPid;
+        this.title = newTitle;
+        this.isparent = newIsparent;
+        this.parent = newParent;
+        this.url = newUrl;
+        this.surl = newSurl;
+    }
+    @Override
+    public void run(){
         PrintWriter out = new PrintWriter(System.out);
-        String surl = "http://technet.microsoft.com/en-us/library/ff355324.aspx"+"?toc=1";//in.nextLine()+"?toc=1";
-        out.println("Home");
-        connector = new BaseConnector();
-        deleteData(connector,
-                   "ff355324");
-        insertData(connector,
-                   "ff355324",
-                    "Forefront Threat Management Gateway (TMG) 2010",
-                    "true",
-                    "",
-                    "http://technet.microsoft.com/en-us/library/ff355324.aspx");
-        out.flush();
-        getJsonArray(surl,0);
-        connector.close();
+        out.println(title);
+        try {
+            connector = new BaseConnector();
+            deleteData(connector,
+                       pid);
+            insertData(connector,
+                       pid,
+                       title,
+                       isparent,
+                       parent,
+                       url);
+            out.flush();
+            getJsonArray(surl,0);
+            connector.close();
+        } catch (ClassNotFoundException | SQLException | IOException ex) {
+            Logger.getLogger(MyThread.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     private static void insertData(BaseConnector connector, String pid,String title, String isparent, String parent, String href) throws SQLException{
         BaseStatement statement = new BaseStatement(connector);
@@ -48,8 +77,8 @@ public class Parser{
     };
     private static void getJsonArray(String surl,int depth) throws MalformedURLException, IOException, SQLException{
         PrintWriter out = new PrintWriter(System.out);
-        URL url = new URL(surl);
-        URLConnection conn = url.openConnection();
+        URL murl = new URL(surl);
+        URLConnection conn = murl.openConnection();
         Scanner sFromUrl = new Scanner(conn.getInputStream());
         StringBuilder resultString = new StringBuilder();
         while(sFromUrl.hasNextLine()){
@@ -65,20 +94,39 @@ public class Parser{
                 newTitle = (String) json.get("Title");
                 for (int j = 0 ; j < depth ; j++)
                     out.print("  ");
-                out.println(newTitle);    
+                out.println(newTitle);   
+                out.println(Thread.activeCount()); 
                 out.flush();
                 JSONObject extendedAttributes = (JSONObject) json.get("ExtendedAttributes");
-                BaseStatement statement = new BaseStatement(connector);
-                deleteData(connector,
-                    StringUtils.substringBetween(newUrl, "library/", ".aspx"));
-                insertData(connector,
-                    StringUtils.substringBetween(newUrl, "library/", ".aspx"),
-                    newTitle.replaceAll("'", ""),
-                    ("true".equals((String)extendedAttributes.get("data-tochassubtree")))?"true":"false",
-                    StringUtils.substringBetween(surl, "library/", ".aspx"),
-                    newUrl);
-                if ("true".equals((String)extendedAttributes.get("data-tochassubtree")))
-                        getJsonArray(newUrl,depth);
+                String newPid = StringUtils.substringBetween(newUrl, "library/", ".aspx"),
+                       newMyTitle = newTitle.replaceAll("'", ""), 
+                       newIsparent = ("true".equals((String)extendedAttributes.get("data-tochassubtree")))?"true":"false",
+                       newParent = StringUtils.substringBetween(surl, "library/", ".aspx"),
+                       newStartUrl = newUrl;
+                if(Thread.activeCount()<20){
+                    MyThread p = new MyThread(newPid, newMyTitle, newIsparent, newParent, newStartUrl,newStartUrl+"?toc=1");
+                    p.start();
+                }else{
+                    BaseStatement statement = new BaseStatement(connector);
+                    deleteData(connector,
+                               newPid
+                    );
+                    insertData( connector,
+                                newPid,
+                                newMyTitle,
+                                newIsparent,
+                                newParent,
+                                newStartUrl 
+                    );
+                    if ("true".equals((String)extendedAttributes.get("data-tochassubtree")))
+                            getJsonArray(newUrl,depth);
+                    }
                 }
     }
 }
+public class Parser{
+    public static void main (String[]args) throws ClassNotFoundException, SQLException, IOException {
+        MyThread t = new MyThread();
+        t.start();
+    }
+} 
