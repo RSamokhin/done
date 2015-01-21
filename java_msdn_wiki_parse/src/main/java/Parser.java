@@ -21,8 +21,7 @@ class MyThread extends Thread{
         this.title = "TechNet Library";
         this.isparent = "true";
         this.parent = "";
-        this.url = "http://technet.microsoft.com/en-us/library/aa991542.aspx";
-        
+        this.url = "https://technet.microsoft.com/en-us/library/aa991542.aspx";
     }
     public MyThread (String newPid,String newTitle,String newIsparent,String newParent,String newUrl){
         this.pid = newPid;
@@ -74,27 +73,26 @@ class MyThread extends Thread{
         cdata[0][2]=pid;        
         statement.makeQuery("delete","done.done",columns,cdata,params);
     };
-    private static void getJsonArray(String surl,int depth) throws MalformedURLException, IOException, SQLException{
+    private static void getJsonArray(String surl,int depth) throws MalformedURLException, IOException, SQLException{        
         PrintWriter out = new PrintWriter(System.out);
-        URL murl = new URL(surl+"?toc=1");
+        URL murl = new URL(surl+"?toc=1&"+Math.random());
         URLConnection conn = murl.openConnection();
         Scanner sFromUrl = new Scanner(conn.getInputStream());
         StringBuilder resultString = new StringBuilder();
         while(sFromUrl.hasNextLine()){
             resultString.append(sFromUrl.nextLine());
         }
-        //System.out.println(surl);
-        JSONArray jsonArray = new JSONArray(resultString.toString());
-        depth = depth+1;
-        //if (depth<3)
+        if (resultString.length()>0){
+            JSONArray jsonArray = new JSONArray(resultString.toString());
+            depth = depth+1;
             for(int i = 0 ; i < jsonArray.length(); i++){
                 String newUrl,newTitle;
-                JSONObject json =  (JSONObject) jsonArray.get(i);
-                newUrl = "http://technet.microsoft.com"+(String) json.get("Href");
+                JSONObject json = null;
+                json =  (JSONObject) jsonArray.get(i);
+                newUrl = (String) json.get("Href");
                 newTitle = (String) json.get("Title");
                 for (int j = 0 ; j < depth ; j++)
                     out.print("  ");
-                //out.print(Thread.activeCount());
                 out.println(newTitle);   
                 out.flush();
                 JSONObject extendedAttributes = (JSONObject) json.get("ExtendedAttributes");
@@ -121,6 +119,7 @@ class MyThread extends Thread{
                             getJsonArray(newUrl,depth);
                     }
                 }
+        }
     }
 }
 public class Parser{

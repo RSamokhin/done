@@ -60,7 +60,6 @@ public class BaseStatement {
         query.append(") Values ('");
         query.append(StringUtils.join(params, "','"));
         query.append("')");
-        //System.out.println(query);
         return query.toString();
     }    
 }
