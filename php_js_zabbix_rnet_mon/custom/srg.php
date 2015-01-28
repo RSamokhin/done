@@ -1,7 +1,7 @@
 <?php
 
-require 'ZabbixApiAbstract.class.php';
-require 'ZabbixApi.class.php';
+require '../ZabbixApiAbstract.class.php';
+require '../ZabbixApi.class.php';
 
 try {
     $forquery = array();
