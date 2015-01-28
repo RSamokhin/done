@@ -2,7 +2,7 @@ var options = [];
 var auth = false;
 var srg_array = [];
 $(document).ready(function () {
-	var arry_url = '/zabbix/srg.array?'+Math.random();
+	var arry_url = '/zabbix/custom/srg.array?'+Math.random();
 	$.ajax({url:arry_url,
 		dataType:'json',
 		success:function(vals){
@@ -12,7 +12,7 @@ $(document).ready(function () {
 	
 
 	var data = [];	
-	var murl = '/zabbix/srg.json?'+Math.random();
+	var murl = '/zabbix/custom/srg.json?'+Math.random();
 	$.ajax({
 			url:murl,
 			dataType:'json',
@@ -234,7 +234,7 @@ function goDance(){
 	}, 60000);
 }
 function req(){
-			var murl = '/zabbix/srg.json?'+Math.random();
+			var murl = '/zabbix/custom/srg.json?'+Math.random();
 			$.ajax({
 					url:murl,
 					dataType:'json',
