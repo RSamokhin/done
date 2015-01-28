@@ -8,7 +8,7 @@ try {
     $qery = array();
     $jsla = array();
     $hostgroups = array();
-    $api = new ZabbixApi('https://rs-mon.hq.rosseti.ru/zabbix/api_jsonrpc.php', 'dashboard', 'dwnxo3C1fX');
+    $api = new ZabbixApi('https://rs-smks-01.hq.rosseti.ru/zabbix/api_jsonrpc.php', 'dashboard', 'dwnxo3C1fX');
     $services = $api->serviceGet(array('output' => 'extend','selectDependencies' => 'extend'));
 
     foreach($services as $service) {
