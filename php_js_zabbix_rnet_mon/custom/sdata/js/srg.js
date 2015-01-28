@@ -6,7 +6,7 @@ $(document).ready(function () {
 
 
 	var data = [];	
-	var murl = '/zabbix/srg.json?'+Math.random();
+	var murl = '/zabbix/custom/srg.json?'+Math.random();
 	$.ajax({
 			url:murl,
 			dataType:'json',
@@ -225,7 +225,7 @@ function goDance(){
 	}, 60000);
 }
 function req(){
-			var murl = '/zabbix/srg.json?'+Math.random();
+			var murl = '/zabbix/custom/srg.json?'+Math.random();
 			$.ajax({
 					url:murl,
 					dataType:'json',
