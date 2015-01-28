@@ -85,7 +85,11 @@
 			</script>
 
 			 <?php if (isset($_GET["setArray"])) :
+				try {
 					file_put_contents("srg.array",   "[".($_GET["setArray"])."]"       );	
+				} catch (Exception $e) {
+					echo 'Выброшено исключение: ',  $e->getMessage(), "\n";
+				}	
 					echo "<script>alert('Новые параметры установлены');</script>";
 			  endif; ?>
 
