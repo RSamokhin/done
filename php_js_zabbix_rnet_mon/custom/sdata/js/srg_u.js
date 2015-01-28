@@ -97,7 +97,7 @@ $(document).ready(function () {
 						if (auth){
 							$('#myModalLabel').html('Информация о сервисе "'+$(this).attr('parentName')+'"');
 							newFrame = $('<iframe>').attr({
-								'src':$(this).attr('url')+'&'+Math.random(),
+								'src':'/zabbiz/'+$(this).attr('url')+'&'+Math.random(),
 								'align':'center'
 							}).html('Iframes Disabled').css({
 								'width':'100%',
