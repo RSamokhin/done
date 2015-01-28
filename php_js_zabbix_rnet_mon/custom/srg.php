@@ -1,7 +1,7 @@
 <?php
 
-require '/usr/share/zabbix/ZabbixApiAbstract.class.php';
-require '/usr/share/zabbix/ZabbixApi.class.php';
+require dirname(__FILE__).'../ZabbixApiAbstract.class.php';
+require dirname(__FILE__).'../ZabbixApi.class.php';
 
 try {
     $forquery = array();
