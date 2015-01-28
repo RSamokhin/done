@@ -9,3 +9,4 @@
 7. cd /usr/share/zabbix 
 8. mv php_js_zabbix_rnet_mon custom/
 9. nano /etc/php.ini (memory_limit = 1024M; post_max_size = 1024M)
+10. chmod -R 777 /usr/share/zabbix/custom
