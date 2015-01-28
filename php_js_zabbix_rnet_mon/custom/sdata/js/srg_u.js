@@ -22,7 +22,7 @@ $(document).ready(function () {
 					if (srg_array.indexOf(parseInt(val[v].id))>-1)
 						vals.push(val[v]);
 				}
-				console.log(vals);
+				//console.log(vals);
 				var num = vals.length;
 				for (i=0;i<num;i++){
 				   
@@ -135,7 +135,7 @@ $(document).ready(function () {
 		try{
 			link = $(this).attr('href').split('#')[1];
 			$('a[name='+link+']').parent().effect("highlight", {'color':'#B24926'}, 10000);
-			console.log($('a[name='+link+']').parent());
+			//console.log($('a[name='+link+']').parent());
 		}catch(e){}
 	} )
 	
@@ -245,7 +245,7 @@ function req(){
                         	                		if (srg_array.indexOf(parseInt(val[v].id))>-1)
                         	               			         vals.push(val[v]);
         		                      		}
-			                                console.log(vals);
+			                                //console.log(vals);
 
 							vals.forEach(function(m){
 							    // if (srg_array.indexOf(parseInt(vals[i].id))>-1){
