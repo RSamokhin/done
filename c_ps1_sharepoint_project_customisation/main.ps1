@@ -4,4 +4,3 @@
 }
 Add-PSSnapin Microsoft.SharePoint.PowerShell
 $mySite = Get-SPSite $myConfig.siteUrl
-
