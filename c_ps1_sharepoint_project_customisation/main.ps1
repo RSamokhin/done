@@ -1,6 +1,8 @@
-﻿$myConfig = @{
-    siteUrl="http://pelmen-tg-prj/PWA";
-
+﻿Add-PSSnapin Microsoft.SharePoint.PowerShell
+. ".\configurationObject.ps1"
+$mySite = Get-SPSite $myConfig.siteUrl;
+modifyList($mySite)
+function modifyList($mySite){
+    . ".\getAllListsFromSite.ps1"
+    getAllLists($mySite) | where "listTitle" -eq $myConfig.modifyList;
 }
-Add-PSSnapin Microsoft.SharePoint.PowerShell
-$mySite = Get-SPSite $myConfig.siteUrl
