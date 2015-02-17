@@ -1,0 +1,23 @@
+{
+  "name": "JSTemplate",
+  "version": "0.0.1",
+  "description": "NodeJS project builder template",
+  "author": "Roman Samokhin",
+  "license": "ISC",
+  "devDependencies":{
+    "gulp":"^3.8.1",
+    "gulp-autoprefixer":"*",
+    "gulp-cssmin":"*",
+    "gulp-connect":"*",
+    "gulp-imagemin":"*",
+    "imagemin-pngquant":"*",
+    "gulp-uglify":"*",
+    "gulp-sass":"*",
+    "gulp-sourcemaps":"*",
+    "gulp-rigger":"*",
+    "gulp-watch":"*",
+    "opn":"*",
+    "rimraf":"*",
+    "bower":"*"
+  }
+}
