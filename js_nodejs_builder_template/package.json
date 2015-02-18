@@ -4,20 +4,20 @@
   "description": "NodeJS project builder template",
   "author": "Roman Samokhin",
   "license": "ISC",
-  "devDependencies":{
-    "gulp":"^3.8.1",
-    "gulp-autoprefixer":"*",
-    "gulp-cssmin":"*",
-    "gulp-connect":"*",
-    "gulp-imagemin":"*",
-    "imagemin-pngquant":"*",
-    "gulp-uglify":"*",
-    "gulp-sass":"*",
-    "gulp-sourcemaps":"*",
-    "gulp-rigger":"*",
-    "gulp-watch":"*",
-    "opn":"*",
-    "rimraf":"*",
-    "bower":"*"
+  "devDependencies": {
+    "bower": "*",
+    "gulp": "^3.8.11",
+    "gulp-autoprefixer": "*",
+    "gulp-connect": "*",
+    "gulp-cssmin": "*",
+    "gulp-imagemin": "*",
+    "gulp-rigger": "*",
+    "gulp-sass": "*",
+    "gulp-sourcemaps": "*",
+    "gulp-uglify": "*",
+    "gulp-watch": "*",
+    "imagemin-pngquant": "*",
+    "opn": "*",
+    "rimraf": "*"
   }
 }
