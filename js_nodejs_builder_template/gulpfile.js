@@ -118,3 +118,6 @@ gulp.task('webserver',function(){
 gulp.task('clean',function(cb){
     rimraf(path.clean,cb);
 });
+gulp.task('openbrowser',function(){
+    opn('http://'+server.host+':'+server.port+'/build');
+});
