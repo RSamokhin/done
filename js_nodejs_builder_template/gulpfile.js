@@ -33,7 +33,8 @@ var path = {
         css     : 'src/style/**/*.scss',
         img     : 'src/img/**/*.*',
         fonts   : 'src/fonts/**/*.*'
-    }
+    },
+    clean: "build"
 };
 var server = {
     host        : 'localhost',
@@ -116,4 +117,4 @@ gulp.task('webserver',function(){
 });
 gulp.task('clean',function(cb){
     rimraf(path.clean,cb);
-})
+});
