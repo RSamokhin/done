@@ -107,3 +107,10 @@ gulp.task('watch',function(){
         gulp.start('fonts:build');
     });
 });
+gulp.task('webserver',function(){
+    connect.server({
+        host:server.host,
+        port:server.port,
+        livereload:true
+    });
+});
