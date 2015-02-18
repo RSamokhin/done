@@ -45,3 +45,12 @@ gulp.task('html:build',function(){
         .pipe(gulp.dest(path.build.html))
         .pipe(connect.reload())
 })
+gulp.task('js:build',function(){
+    gulp.src(path.src.js)
+        .pipe(rigger())
+        .pipe(sourcemaps.init())
+        .pipe(uglify())
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest(path.build.js))
+        .pipe(connect.reload())
+})

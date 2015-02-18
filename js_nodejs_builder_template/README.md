@@ -2,5 +2,6 @@
 
 * sudo npm install
 * bower i
-* npm install -g gulp
+* sudo npm install -g gulp
 * gulp build:html
+* gulp js:build
