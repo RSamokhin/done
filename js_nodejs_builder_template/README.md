@@ -2,3 +2,4 @@
 
 * sudo npm install
 * bower i
+* gulp build:html
