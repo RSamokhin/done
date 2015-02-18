@@ -35,3 +35,7 @@ var path = {
         fonts   : 'src/fonts/**/*.*'
     }
 }
+var server = {
+    host        : 'localhost',
+    port        : '8888'
+}
