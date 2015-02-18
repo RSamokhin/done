@@ -114,3 +114,6 @@ gulp.task('webserver',function(){
         livereload:true
     });
 });
+gulp.task('clean',function(cb){
+    rimraf(path.clean,cb);
+})
