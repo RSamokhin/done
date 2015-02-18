@@ -5,3 +5,5 @@
 * sudo npm install -g gulp
 * gulp build:html
 * gulp js:build
+* gulp style:build
+

@@ -54,3 +54,13 @@ gulp.task('js:build',function(){
         .pipe(gulp.dest(path.build.js))
         .pipe(connect.reload())
 })
+gulp.task('style:build',function(){
+    gulp.src(path.src.css)
+        .pipe(sourcemaps.init())
+        .pipe(sass())
+        .pipe(prefixer())
+        .pipe(cssmin())
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest(path.build.css))
+        .pipe(connect.reload())
+})
