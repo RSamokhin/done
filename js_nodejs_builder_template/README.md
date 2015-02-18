@@ -12,3 +12,5 @@
 or simply
 * gulp build
 
+* gulp watch
+

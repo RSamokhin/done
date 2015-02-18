@@ -6,4 +6,7 @@ div{
   background-color: $primary-color;
   width: $w;
   height: $h;
+  position: absolute;
+  top:100px;
+  left: 100px;
 }
