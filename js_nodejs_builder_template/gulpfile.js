@@ -83,3 +83,10 @@ gulp.task('fonts:build',function(){
     gulp.src(path.src.fonts)
         .pipe(gulp.dest(path.build.fonts))
 });
+gulp.task('build',[
+    'html:build',
+    'js:build',
+    'style:build',
+    'image:build',
+    'fonts:build'
+])

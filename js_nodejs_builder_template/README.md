@@ -9,4 +9,6 @@
 * gulp image:build
 * gulp fonts:build
 
+or simply
+* gulp build
 
