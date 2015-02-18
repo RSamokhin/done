@@ -121,3 +121,10 @@ gulp.task('clean',function(cb){
 gulp.task('openbrowser',function(){
     opn('http://'+server.host+':'+server.port+'/build');
 });
+gulp.task('default',[
+    'clean',
+    'build',
+    'webserver',
+    'watch',
+    'openbrowser'
+]);

@@ -16,3 +16,4 @@ or simply
 * gulp watch
 * gulp clean
 * gulp openbrowser
+* gulp
