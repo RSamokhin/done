@@ -7,4 +7,6 @@
 * gulp js:build
 * gulp style:build
 * gulp image:build
+* gulp fonts:build
+
 

@@ -34,17 +34,17 @@ var path = {
         img     : 'src/img/**/*.*',
         fonts   : 'src/fonts/**/*.*'
     }
-}
+};
 var server = {
     host        : 'localhost',
     port        : '8888'
-}
+};
 gulp.task('html:build',function(){
     gulp.src(path.src.html)
         .pipe(rigger())
         .pipe(gulp.dest(path.build.html))
         .pipe(connect.reload())
-})
+});
 gulp.task('js:build',function(){
     gulp.src(path.src.js)
         .pipe(rigger())
@@ -53,7 +53,7 @@ gulp.task('js:build',function(){
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(path.build.js))
         .pipe(connect.reload())
-})
+});
 gulp.task('style:build',function(){
     gulp.src(path.src.css)
         .pipe(sourcemaps.init())
@@ -63,7 +63,7 @@ gulp.task('style:build',function(){
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(path.build.css))
         .pipe(connect.reload())
-})
+});
 gulp.task('image:build',function(){
     gulp.src(path.src.img)
         .pipe(imagemin({
@@ -78,4 +78,8 @@ gulp.task('image:build',function(){
         }))
         .pipe(gulp.dest(path.build.img))
         .pipe(connect.reload())
-})
+});
+gulp.task('fonts:build',function(){
+    gulp.src(path.src.fonts)
+        .pipe(gulp.dest(path.build.fonts))
+});
