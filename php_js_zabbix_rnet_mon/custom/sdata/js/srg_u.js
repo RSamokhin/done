@@ -266,7 +266,7 @@ function req(){
 										$('.light[parentid="'+m.id+'"]>.active').addClass('green');
 										break;
 								}
-								if ((newVal<85)||(newTr<2)){
+								if (/*(newVal<85)||*/(newTr<2)){
 									if ($('.errorList').children('.error[parentid="'+m.id+'"]').length==0){
 										newLi = $('<li>').addClass('error').attr('parentid',m.id).html('<a href="#'+m.id+'">'+m.name+'</a>');
 										newLi.appendTo($('.errorList'));
