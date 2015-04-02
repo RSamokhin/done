@@ -6,17 +6,20 @@
 
 
 <style>
+    #scriptWPQ1{
+        padding-top: 15px;
+    }
     #yearPaginator{
-        padding-left: 82px !important;
+        padding-left: 85px !important;
     }
     #monthPaginator{
-        padding-left: 82px !important;
+        padding-left: 85px !important;
     }
     .longC{
-        width: 710px !important;
+        width: 750px !important;
     }
     .longY{
-        width: 940px !important;
+        width: 970px !important;
     }
     .jPaginate{
         height:34px;
@@ -387,10 +390,10 @@
             start: 2015,
             display: 7,
             border: false,
-            text_color: '#777',
-            background_color: '#EFF8FF',
-            text_hover_color: '#0072C6',
-            background_hover_color: '#EFF8FF',
+            text_color: '#FFF',
+            background_color: '#77A9D6',
+            text_hover_color: '#FFF',
+            background_hover_color: '#77A9D6',
             images:false
         });
         $("#monthPaginator").paginate({
@@ -398,10 +401,10 @@
             count: 12,
             display: 9,
             border: false,
-            text_color: '#777',
-            background_color: '#EFF8FF',
-            text_hover_color: '0072C6',
-            background_hover_color: '#EFF8FF',
+            text_color: '#FFF',
+            background_color: '#77A9D6',
+            text_hover_color: '#FFF',
+            background_hover_color: '#77A9D6',
             images:false
         });
         $("#datePaginator").paginate({
@@ -410,10 +413,10 @@
             start: 4,
             display: 12,
             border: false,
-            text_color: '#777',
-            background_color: '#EFF8FF',
-            text_hover_color: '0072C6',
-            background_hover_color: '#EFF8FF',
+            text_color: '#FFF',
+            background_color: '#77A9D6',
+            text_hover_color: '#FFF',
+            background_hover_color: '#77A9D6',
             images:false
         });
     });
@@ -469,12 +472,11 @@
 
 <span id="srgFilters">Фильтры</span>
 <div class="paginatorSRG">
-    <div id="yearPaginator" style="padding-left: 82px !important;">
+    <div id="yearPaginator">
     </div>
-    <div id="monthPaginator" style="padding-left: 82px !important;">
+    <div id="monthPaginator" >
     </div>
-    <div id="datePaginator" style="padding-left: 82px !important;">
-    </div>
+
 </div>
 
 
@@ -491,8 +493,28 @@
         border-bottom: 1px solid;
     }
     .paginatorSRG{
-        width: 500px;
+        width: 477px;
         padding-bottom: 10px;
+        padding-top: 20px;
+
+
+        background: rgb(238,238,238);
+        background: -moz-linear-gradient(top,  rgba(238,238,238,1) 0%, rgba(204,204,204,1) 99%, rgba(204,204,204,1) 99%, rgba(204,204,204,1) 99%, rgba(204,204,204,1) 99%, rgba(229,229,229,1) 100%, rgba(204,204,204,1) 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(238,238,238,1)), color-stop(99%,rgba(204,204,204,1)), color-stop(99%,rgba(204,204,204,1)), color-stop(99%,rgba(204,204,204,1)), color-stop(99%,rgba(204,204,204,1)), color-stop(100%,rgba(229,229,229,1)), color-stop(100%,rgba(204,204,204,1)));
+        background: -webkit-linear-gradient(top,  rgba(238,238,238,1) 0%,rgba(204,204,204,1) 99%,rgba(204,204,204,1) 99%,rgba(204,204,204,1) 99%,rgba(204,204,204,1) 99%,rgba(229,229,229,1) 100%,rgba(204,204,204,1) 100%);
+        background: -o-linear-gradient(top,  rgba(238,238,238,1) 0%,rgba(204,204,204,1) 99%,rgba(204,204,204,1) 99%,rgba(204,204,204,1) 99%,rgba(204,204,204,1) 99%,rgba(229,229,229,1) 100%,rgba(204,204,204,1) 100%);
+        background: -ms-linear-gradient(top,  rgba(238,238,238,1) 0%,rgba(204,204,204,1) 99%,rgba(204,204,204,1) 99%,rgba(204,204,204,1) 99%,rgba(204,204,204,1) 99%,rgba(229,229,229,1) 100%,rgba(204,204,204,1) 100%);
+        background: linear-gradient(to bottom,  rgba(238,238,238,1) 0%,rgba(204,204,204,1) 99%,rgba(204,204,204,1) 99%,rgba(204,204,204,1) 99%,rgba(204,204,204,1) 99%,rgba(229,229,229,1) 100%,rgba(204,204,204,1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 );
+
+
+    }
+    .paginatorSRG span,.paginatorSRG a{
+        line-height: 17px;
+        font-weight: bold;
+    }
+    .paginatorSRG span,.paginatorSRG a:hover{
+        opacity:0.7;
     }
     .jPag-sprevious,.jPag-snext{
         color: orange;
