@@ -1,0 +1,194 @@
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+
+<style>
+    #courusel-container{
+        width: 650px;
+        height: 80px;
+        border:1px solid lavender;
+        border-radius: 10px;
+    }
+    .line-container{
+        width: 100%;
+        height: 35px;
+    }
+    #courusel-hr{
+        width: 90%;
+        margin-bottom: 5px;
+        margin-top: 5px;
+    }
+    .pn-button{
+        width: 25px;
+        background-size: cover;
+        height: 25px;
+        margin-bottom: 5px;
+        cursor: pointer;
+    }
+    .pn-button-hidden{
+        visibility: hidden;
+    }
+    .inline-container{
+        display: inline-block;
+        box-sizing: border-box;
+    }
+    .previous-button{
+        margin-left: 10px;
+        background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADI0lEQVR4Xu2VXUgUXRjH/2d2RK2wtg92mzXWD1axRfNViSJkibqpF+qib1n7uDAoKDBvMsKoriZCDOqFSlAIvDDKqO4jJKheqosKIaygNC0iV/zenTmnM3Nmd9LNVbE2gn3gx/PM5/9/nnkOg1Sk+Ctp2UYq23egDgBBsuPOQVfwfdP23s59uAsgA/MMCXOIq/+SQMmatarLV64QAgngzDPkWa/8wIqgIe4pWq8QRkF+UfOlWa+8uFx155cqoBEwTtIMdFQvC24ObGpTCioUhwRAnzBxOPBLQp5x5f4S1Z3jVwgNA2AWFK6FKHt5GDe4EQ0EIJxJGWaOi08jeLqxGY3iRQm2UUfQGSwp8qtKQZkikegbbQOADjDK0U0Y0wADGrGzzqEGGq/D5nHX6xf3/rmC3QDGOZCnW3lxQaHqWuVTCH+QTTFACBXioKYYM2tDSAexjDBhZDLQQGHvnp8auF2VFSz2+VTFW6hIYIA2DtgGQCTGEwOLmdANbGEOqC4MQYtlRkSWHAlm4L8tCPhzc1X3Sq+xciHMYBsgDIzF5kBAuLjogOgEM4T02IptdIE0vQFH9wCWbwhHMpg2AUhMtF4yiA4YM7MQpsIIHQejE2D6uBDXRgFec6zvHxZzQjWzY1ICA6zxMR7Jae+uV4MezsvLd0rRDjC7A4AOpo0A4UEgMgwWDglhFgaBNYgEUeKCJDBAOZ8vdI5f7hl401e/VT/j9XicskzE3p8IgXJgCOpjYhYkxCBWl2Blm9kbiI55f9sresu79KNSVT5Sk7NId0rakGgpobYoiSPuGplqgMUbsC/Hn/fsL5V31lXoDd4s5kyTbQHiAPrGMPD2G7pj8yFxrGyLxwt8HcLDXa1oADAWbyC+O+5TlY7je1fTmtzFbIm5hRxC5P9+dAauoR5AGHOLL5xejoZZBOFkHypLq311lAyEToKNnuY0gL04hvsAFvzmn5GYiZbnkZvtXXJzzzAJ0aitJP6ONU7vuQeRS01P0s9/GJIGIxR/JGRO9tnN6Re7aqXQM/sTJDPETBxZl3midQ9UAJl/qhNujkfU84sUqfgOeABm43YciAwAAAAASUVORK5CYII=');
+    }
+    .pick-container{
+        width: 572px;
+        height: 35px;
+    }
+    .pick-container-inner>.ym-button-container{
+        width:20%;
+    }
+    .next-button{
+        background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADPklEQVR4Xu2V3WsTWRjGnzPJTNokVSqKX8TGNqVilaposTd7KWLVZSv1o6j0QvSuV4r+AV74cWHqnR/QgtWiUkQURCM0Vf+CXbGtLcbVrVURt9XaTObr+OacaTNQY+nSjTd54cczBzI8z/POJEFxiswHd1vQ0H0gHMV/GGUe/LUFKk7WVEbbr+wJVf6KAP5SH/zVG3/b3VC3pqdj/8KqQgcAY4AWKEVFTd2GDVVL450UorABFBJuUogAYrWbdtavjfR0HVwcK3QAwoKqlSCyurpufXRh+/VDS2YN4fce7jWjYVUQK8HkWoUqhNSZZ5ovBkrKS7EcjiECMGQ3oaKyOrZDC6QiN1qVppbOD8N5w3sOWvIAbtXWb/sdigIojIwYKVzHrHBSAgQcMFJG6lccaIsigGOJEHBMcMLUvyL1KvXgxT9G2/6O98OzBQg+owCbG480igA+QgRwzQnAG8AmcQBG6hB8ynxKDXFt6BMYeffx+Z9vzKa9V0eGfvoIwCBvhCIQ5lwGkHBPCEdCJqS5ACA816rmw8plC9aZ1qeLt49G2povvx3KF0BiZeA+gmmYzCGNRR6HlOBuCExtwJ4RhHETqqoguiK8XfVP3Ll9bNUfzZfeDP0ogDSyDeHGoAglhEDAXXWNp4PYriGdHZ2OOh3TgJ0RcMeEzzZRrqVruVW+C0A7YefZgC42wB23PUEqzRUCHFw8X9fAGCPDScD6JswFnIsymIIDY5MskxwMPWzpGumZ/R3gijxw5iqJQ02ML0DmM7hJaqfBYAKckB+fViY0d6tuAcmXoUfxJ+Z5AO8Je/Z3wOGEQb7/ghMgGCxh4uHn5kw27xsIJVquTZwA8JrI5N3AuEnx/u4XBoxx0ZpRUzBHtPICVxUfUBIAAj6PuSKbZyygbzCciCeNsx7z/D9ERDVRgbmN+rQNp7ZUYKvciGw+nlYyff2hxL7Or8dnmOfZgEEMESnMbYJlAYzJteeaPxkIPY73mue85v8XwecncV+/AJ6Og4+eYfrN1rJ7AGqIQEH+Db3N+wbCiQu9nmdegAn+RRsYPc307sPhGc0LsoFxHegdpO950ixYcy+a2zqWa154VMKPuU+RIvgORtR4Q9VyJ+oAAAAASUVORK5CYII=');
+    }
+    .ym-button-container{
+        display: table-cell;
+        vertical-align: middle;
+    }
+    .pick-container-inner{
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        display: table;
+    }
+    .ym-button{
+        height: 23px;
+        cursor: pointer;
+        line-height: 25px;
+        color: #0077B3;
+        font-family: sans-serif;
+    }
+    .year-button{
+        width: 100px;
+    }
+    .ym-button:hover{
+        opacity: 0.8;
+    }
+    .year-selected{
+        color:#ff6600;
+        font-weight: bold;
+    }
+    .year-selected:hover{
+        color:#ff6600;
+    }
+    .month-button{
+        font-weight: bold;
+    }
+    .month-button-selected {
+        background-color: #D66938;
+        color: #FFF;
+    }
+    .month-button-selected:hover {
+        color: #FFF;
+    }
+    .ym-button-hidden{
+        display: none;
+    }
+</style>
+
+<div id="courusel-container">
+    <div id="year-container" class="line-container">
+        <div class="previous-button pn-button inline-container pn-button-hidden"></div>
+        <div class="pick-container inline-container">
+            <div class="pick-container-inner">
+
+                <div class="ym-button-container" align="center">
+                    <div class="ym-button year-button">2014</div>
+                </div>
+                <div class="ym-button-container" align="center">
+                    <div class="ym-button year-button year-selected">2015</div>
+                </div>
+
+            </div>
+        </div>
+        <div class="next-button pn-button inline-container pn-button-hidden"></div>
+    </div>
+    <hr id="courusel-hr" />
+    <div id="month-container" class="line-container">
+        <div class="previous-button pn-button inline-container pn-button-hidden"></div>
+        <div class="pick-container inline-container">
+            <div class="pick-container-inner">
+
+                <div class="ym-button-container" align="center">
+                    <div class="ym-button month-button ">Январь</div>
+                </div>
+                <div class="ym-button-container" align="center">
+                    <div class="ym-button month-button">Февраль</div>
+                </div>
+                <div class="ym-button-container" align="center">
+                    <div class="ym-button month-button">Март</div>
+                </div>
+                <div class="ym-button-container" align="center">
+                    <div class="ym-button month-button month-button-selected">Апрель</div>
+                </div>
+                <div class="ym-button-container" align="center">
+                    <div class="ym-button month-button">Май</div>
+                </div>
+                <div class="ym-button-container ym-button-hidden" align="center">
+                    <div class="ym-button month-button">Июнь</div>
+                </div>
+                <div class="ym-button-container ym-button-hidden" align="center">
+                    <div class="ym-button month-button">Июль</div>
+                </div>
+                <div class="ym-button-container ym-button-hidden" align="center">
+                    <div class="ym-button month-button">Август</div>
+                </div>
+                <div class="ym-button-container ym-button-hidden" align="center">
+                    <div class="ym-button month-button">Сентябрь</div>
+                </div>
+                <div class="ym-button-container ym-button-hidden" align="center">
+                    <div class="ym-button month-button">Октябрь</div>
+                </div>
+                <div class="ym-button-container ym-button-hidden" align="center">
+                    <div class="ym-button month-button">Ноябрь</div>
+                </div>
+                <div class="ym-button-container ym-button-hidden" align="center">
+                    <div class="ym-button month-button">Декабрь</div>
+                </div>
+
+            </div>
+        </div>
+        <div class="next-button pn-button inline-container"></div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $('.next-button').on('click',function(){
+            $(this).prev().find('.ym-button-container:not(.ym-button-hidden)').first().addClass('ym-button-hidden');
+            $(this).prev().find('.ym-button-container:not(.ym-button-hidden)').last().next().removeClass('ym-button-hidden');
+            if($(this).siblings('.previous-button').hasClass('pn-button-hidden')){
+                $(this).siblings('.previous-button').removeClass('pn-button-hidden');
+            }
+            if($(this).prev().find('.ym-button-container:not(.ym-button-hidden)').last().index()===11){
+                $(this).addClass('pn-button-hidden');
+            }
+        });
+        $('.previous-button').on('click',function(){
+            $(this).next().find('.ym-button-container:not(.ym-button-hidden)').last().addClass('ym-button-hidden');
+            $(this).next().find('.ym-button-container:not(.ym-button-hidden)').first().prev().removeClass('ym-button-hidden');
+            if($(this).siblings('.next-button').hasClass('pn-button-hidden')){
+                $(this).siblings('.next-button').removeClass('pn-button-hidden');
+            }
+            if($(this).next().find('.ym-button-container:not(.ym-button-hidden)').first().index()===0){
+                $(this).addClass('pn-button-hidden');
+            }
+        });
+        $('.year-button').on('click',function(){
+            $(this).closest('.pick-container-inner').find('.year-selected').removeClass('year-selected');
+            $(this).addClass('year-selected');
+        })
+        $('.month-button').on('click',function(){
+            $(this).closest('.pick-container-inner').find('.month-button-selected').removeClass('month-button-selected');
+            $(this).addClass('month-button-selected');
+        })
+    });
+</script>
