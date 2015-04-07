@@ -92,76 +92,96 @@
     .ym-button-hidden{
         display: none;
     }
+    #filter-button{
+        height: 23px;
+        cursor: pointer;
+        line-height: 25px;
+        color: #0077B3;
+        font-family: sans-serif;
+    }
+    #filter-button:hover{
+        opacity: 0.8;
+        text-decoration: underline;
+     }
+    .picker-global-container-hidden{
+        display: none;
+    }
 </style>
 
-<div id="courusel-container">
-    <div id="year-container" class="line-container">
-        <div class="previous-button pn-button inline-container pn-button-hidden"></div>
-        <div class="pick-container inline-container">
-            <div class="pick-container-inner">
+<span id="filter-button">Фильтры</span>
+<div id="picker-global-container" class="picker-global-container-hidden">
+    <div id="courusel-container">
+        <div id="year-container" class="line-container">
+            <div class="previous-button pn-button inline-container pn-button-hidden"></div>
+            <div class="pick-container inline-container">
+                <div class="pick-container-inner">
 
-                <div class="ym-button-container" align="center">
-                    <div class="ym-button year-button">2014</div>
-                </div>
-                <div class="ym-button-container" align="center">
-                    <div class="ym-button year-button year-selected">2015</div>
-                </div>
+                    <div class="ym-button-container" align="center">
+                        <div class="ym-button year-button">2014</div>
+                    </div>
+                    <div class="ym-button-container" align="center">
+                        <div class="ym-button year-button">2015</div>
+                    </div>
 
+                </div>
             </div>
+            <div class="next-button pn-button inline-container pn-button-hidden"></div>
         </div>
-        <div class="next-button pn-button inline-container pn-button-hidden"></div>
-    </div>
-    <hr id="courusel-hr" />
-    <div id="month-container" class="line-container">
-        <div class="previous-button pn-button inline-container pn-button-hidden"></div>
-        <div class="pick-container inline-container">
-            <div class="pick-container-inner">
+        <hr id="courusel-hr" />
+        <div id="month-container" class="line-container">
+            <div class="previous-button pn-button inline-container pn-button-hidden"></div>
+            <div class="pick-container inline-container">
+                <div class="pick-container-inner">
 
-                <div class="ym-button-container" align="center">
-                    <div class="ym-button month-button ">Январь</div>
-                </div>
-                <div class="ym-button-container" align="center">
-                    <div class="ym-button month-button">Февраль</div>
-                </div>
-                <div class="ym-button-container" align="center">
-                    <div class="ym-button month-button">Март</div>
-                </div>
-                <div class="ym-button-container" align="center">
-                    <div class="ym-button month-button month-button-selected">Апрель</div>
-                </div>
-                <div class="ym-button-container" align="center">
-                    <div class="ym-button month-button">Май</div>
-                </div>
-                <div class="ym-button-container ym-button-hidden" align="center">
-                    <div class="ym-button month-button">Июнь</div>
-                </div>
-                <div class="ym-button-container ym-button-hidden" align="center">
-                    <div class="ym-button month-button">Июль</div>
-                </div>
-                <div class="ym-button-container ym-button-hidden" align="center">
-                    <div class="ym-button month-button">Август</div>
-                </div>
-                <div class="ym-button-container ym-button-hidden" align="center">
-                    <div class="ym-button month-button">Сентябрь</div>
-                </div>
-                <div class="ym-button-container ym-button-hidden" align="center">
-                    <div class="ym-button month-button">Октябрь</div>
-                </div>
-                <div class="ym-button-container ym-button-hidden" align="center">
-                    <div class="ym-button month-button">Ноябрь</div>
-                </div>
-                <div class="ym-button-container ym-button-hidden" align="center">
-                    <div class="ym-button month-button">Декабрь</div>
-                </div>
+                    <div class="ym-button-container" align="center">
+                        <div class="ym-button month-button ">Январь</div>
+                    </div>
+                    <div class="ym-button-container" align="center">
+                        <div class="ym-button month-button">Февраль</div>
+                    </div>
+                    <div class="ym-button-container" align="center">
+                        <div class="ym-button month-button">Март</div>
+                    </div>
+                    <div class="ym-button-container" align="center">
+                        <div class="ym-button month-button ">Апрель</div>
+                    </div>
+                    <div class="ym-button-container" align="center">
+                        <div class="ym-button month-button">Май</div>
+                    </div>
+                    <div class="ym-button-container ym-button-hidden" align="center">
+                        <div class="ym-button month-button">Июнь</div>
+                    </div>
+                    <div class="ym-button-container ym-button-hidden" align="center">
+                        <div class="ym-button month-button">Июль</div>
+                    </div>
+                    <div class="ym-button-container ym-button-hidden" align="center">
+                        <div class="ym-button month-button">Август</div>
+                    </div>
+                    <div class="ym-button-container ym-button-hidden" align="center">
+                        <div class="ym-button month-button">Сентябрь</div>
+                    </div>
+                    <div class="ym-button-container ym-button-hidden" align="center">
+                        <div class="ym-button month-button">Октябрь</div>
+                    </div>
+                    <div class="ym-button-container ym-button-hidden" align="center">
+                        <div class="ym-button month-button">Ноябрь</div>
+                    </div>
+                    <div class="ym-button-container ym-button-hidden" align="center">
+                        <div class="ym-button month-button">Декабрь</div>
+                    </div>
 
+                </div>
             </div>
+            <div class="next-button pn-button inline-container"></div>
         </div>
-        <div class="next-button pn-button inline-container"></div>
     </div>
 </div>
-
 <script>
     $(document).ready(function(){
+        $('#filter-button').on('click',function(){
+            $('#picker-global-container').toggleClass('picker-global-container-hidden');
+        });
+        if(!(location.hash.indexOf()))
         $('.next-button').on('click',function(){
             $(this).prev().find('.ym-button-container:not(.ym-button-hidden)').first().addClass('ym-button-hidden');
             $(this).prev().find('.ym-button-container:not(.ym-button-hidden)').last().next().removeClass('ym-button-hidden');
@@ -185,10 +205,14 @@
         $('.year-button').on('click',function(){
             $(this).closest('.pick-container-inner').find('.year-selected').removeClass('year-selected');
             $(this).addClass('year-selected');
+            location.hash=location.hash.replace(/&&&filterYear=\w*&&&/,'');
+            location.hash=location.hash+'&&&filterYear='+$(this).text()+'&&&';
         })
         $('.month-button').on('click',function(){
             $(this).closest('.pick-container-inner').find('.month-button-selected').removeClass('month-button-selected');
             $(this).addClass('month-button-selected');
+            location.hash=location.hash.replace(/&&&filterMonth=\w*&&&/,'');
+            location.hash=location.hash+'&&&filterMonth='+($(this).parent().index()+1)+'&&&';
         })
     });
 </script>
