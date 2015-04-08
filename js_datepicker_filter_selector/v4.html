@@ -73,17 +73,17 @@
         opacity: 0.8;
     }
     .year-selected{
-        color:#ff6600;
+        color: #7cbbdf;
         font-weight: bold;
     }
     .year-selected:hover{
-        color:#ff6600;
+        color: #7cbbdf;
     }
     .month-button{
         font-weight: bold;
     }
     .month-button-selected {
-        background-color: #D66938;
+        background-color: #02bcff;
         color: #FFF;
     }
     .month-button-selected:hover {
@@ -104,6 +104,12 @@
         text-decoration: underline;
      }
     .picker-global-container-hidden{
+        display: none;
+    }
+    .ms-csrlistview-controldiv,.ms-pivotControl-container{
+        display: none;
+    }
+    table.ms-listviewtable>thead{
         display: none;
     }
 </style>
@@ -178,10 +184,14 @@
 </div>
 <script>
     $(document).ready(function(){
-        $('#filter-button').on('click',function(){
+        var monthFilter = 0;
+        var yearFilter = 0;
+
+        $('[id*=WebPartWPQ]:not([webpartid]):eq(0)').hide();
+        var filterButton = $('#filter-button');
+        filterButton.on('click',function(){
             $('#picker-global-container').toggleClass('picker-global-container-hidden');
         });
-        if(!(location.hash.indexOf()))
         $('.next-button').on('click',function(){
             $(this).prev().find('.ym-button-container:not(.ym-button-hidden)').first().addClass('ym-button-hidden');
             $(this).prev().find('.ym-button-container:not(.ym-button-hidden)').last().next().removeClass('ym-button-hidden');
@@ -205,14 +215,46 @@
         $('.year-button').on('click',function(){
             $(this).closest('.pick-container-inner').find('.year-selected').removeClass('year-selected');
             $(this).addClass('year-selected');
-            location.hash=location.hash.replace(/&&&filterYear=\w*&&&/,'');
-            location.hash=location.hash+'&&&filterYear='+$(this).text()+'&&&';
-        })
+            var yearFilter = $(this).text();
+            try {
+                var filteredArray = filteredArray.Row.filter(function (el) {
+                    return el.Created_x0020_Date.indexOf('#' + yearFilter) > -1;
+                });
+
+            }catch(e){
+
+            }
+            //location.hash=location.hash.replace(/&&&filterYear=\w*&&&/,'');
+            //location.hash=location.hash+'&&&filterYear='+$(this).text()+'&&&';
+        });
         $('.month-button').on('click',function(){
             $(this).closest('.pick-container-inner').find('.month-button-selected').removeClass('month-button-selected');
             $(this).addClass('month-button-selected');
-            location.hash=location.hash.replace(/&&&filterMonth=\w*&&&/,'');
-            location.hash=location.hash+'&&&filterMonth='+($(this).parent().index()+1)+'&&&';
-        })
+            //location.hash=location.hash.replace(/&&&filterMonth=\w*&&&/,'');
+            //location.hash=location.hash+'&&&filterMonth='+($(this).parent().index()+1)+'&&&';
+        });
+        /*if(location.hash.indexOf('&&&filter')>-1){
+            filterButton.trigger('click');
+            if (location.hash.indexOf('&&&filterYear')>-1){
+                try{
+                    var year = location.hash.split('&&&filterYear=')[1].substr(0,4);
+                    $('.year-button:contains('+year+')').trigger('click');
+                }catch(e){
+                    console.log(e);
+                }
+            }
+            if (location.hash.indexOf('&&&filterMonth')>-1){
+                try{
+                    var month = location.hash.split('&&&filterMonth=')[1].split('&&&')[0];
+                    $('.month-button:eq('+(month-1)+')').trigger('click');
+                }catch(e){
+                    console.log(e);
+                }
+            }
+        }*/
+        $('.ym-button').on('click',function(){
+            $('[id*=WebPartWPQ]:not([webpartid]):eq(0)').show();
+            $('[id*=WebPartWPQ]:not([webpartid]):eq(1)').hide();
+        });
     });
 </script>
