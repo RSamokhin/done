@@ -119,7 +119,6 @@
         display: none;
     }
 </style>
-
 <span id="filter-button">Фильтры</span>
 <div id="picker-global-container" class="picker-global-container-hidden">
     <div id="courusel-container">
@@ -198,6 +197,8 @@
                 $('#filter-button').text('Фильтры');
                 $('[id*=WebPartWPQ]:not([webpartid]):eq(0)').hide();
                 $('[id*=WebPartWPQ]:not([webpartid]):eq(1)').show();
+                $('.month-button-selected').removeClass('month-button-selected');
+                $('.year-selected').removeClass('year-selected');
             }else{
                 $('#filter-button').text('Скрыть фильтры');
             }
