@@ -112,6 +112,12 @@
     table.ms-listviewtable>thead{
         display: none;
     }
+    .year-hidden{
+        display: none;
+    }
+    .month-hidden{
+        display: none;
+    }
 </style>
 
 <span id="filter-button">Фильтры</span>
@@ -184,13 +190,17 @@
 </div>
 <script>
     $(document).ready(function(){
-        var monthFilter = 0;
-        var yearFilter = 0;
-
         $('[id*=WebPartWPQ]:not([webpartid]):eq(0)').hide();
         var filterButton = $('#filter-button');
         filterButton.on('click',function(){
             $('#picker-global-container').toggleClass('picker-global-container-hidden');
+            if($('.picker-global-container-hidden').length>0){
+                $('#filter-button').text('Фильтры');
+                $('[id*=WebPartWPQ]:not([webpartid]):eq(0)').hide();
+                $('[id*=WebPartWPQ]:not([webpartid]):eq(1)').show();
+            }else{
+                $('#filter-button').text('Скрыть фильтры');
+            }
         });
         $('.next-button').on('click',function(){
             $(this).prev().find('.ym-button-container:not(.ym-button-hidden)').first().addClass('ym-button-hidden');
@@ -217,21 +227,33 @@
             $(this).addClass('year-selected');
             var yearFilter = $(this).text();
             try {
-                var filteredArray = filteredArray.Row.filter(function (el) {
-                    return el.Created_x0020_Date.indexOf('#' + yearFilter) > -1;
+                var fArray = WPQ2ListData.Row.filter(function(el){
+                   return el.Created_x0020_Date.indexOf('#'+yearFilter)>-1;
                 });
-
+                $('#scriptWPQ2').find('div.ms-tileview-tile-root').addClass('year-hidden',1000);
+                fArray.forEach(function(el){
+                    $('[id*=Tile_WPQ2_'+el.ID+'_1]').removeClass('year-hidden',1000);
+                });
             }catch(e){
 
             }
-            //location.hash=location.hash.replace(/&&&filterYear=\w*&&&/,'');
-            //location.hash=location.hash+'&&&filterYear='+$(this).text()+'&&&';
         });
         $('.month-button').on('click',function(){
             $(this).closest('.pick-container-inner').find('.month-button-selected').removeClass('month-button-selected');
             $(this).addClass('month-button-selected');
-            //location.hash=location.hash.replace(/&&&filterMonth=\w*&&&/,'');
-            //location.hash=location.hash+'&&&filterMonth='+($(this).parent().index()+1)+'&&&';
+            var monthFilter = $(this).parent().index()+1;
+            monthFilter = (monthFilter>9)?monthFilter:'0'+monthFilter;
+            try {
+                var fArray = WPQ2ListData.Row.filter(function(el){
+                    return el.Created_x0020_Date.indexOf('-'+monthFilter+'-')>-1;
+                });
+                $('#scriptWPQ2').find('div.ms-tileview-tile-root').addClass('month-hidden');
+                fArray.forEach(function(el){
+                    $('[id*=Tile_WPQ2_'+el.ID+'_1]').removeClass('month-hidden');
+                });
+            }catch(e){
+
+            }
         });
         /*if(location.hash.indexOf('&&&filter')>-1){
             filterButton.trigger('click');
