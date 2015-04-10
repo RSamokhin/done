@@ -113,10 +113,10 @@
         display: none;
     }
     .year-hidden{
-        display: none;
+        display: none !important;
     }
     .month-hidden{
-        display: none;
+        display: none !important;
     }
 </style>
 <span id="filter-button">Фильтры</span>
@@ -229,11 +229,11 @@
             var yearFilter = $(this).text();
             try {
                 var fArray = WPQ2ListData.Row.filter(function(el){
-                   return el.Created_x0020_Date.indexOf('#'+yearFilter)>-1;
+                    return el.NewsDate.indexOf('.'+yearFilter+' ')>-1;
                 });
-                $('#scriptWPQ2').find('div.ms-tileview-tile-root').addClass('year-hidden');
+                $('#scriptWPQ2').find('div.last-news-info-text').closest('li').addClass('year-hidden');
                 fArray.forEach(function(el){
-                    $('[id*=Tile_WPQ2_'+el.ID+'_1]').removeClass('year-hidden');
+                    $('#scriptWPQ2').find('div.last-news-info-text:odd:contains(.'+yearFilter+')').closest('li').removeClass('year-hidden');
                 });
             }catch(e){
 
@@ -246,11 +246,11 @@
             monthFilter = (monthFilter>9)?monthFilter:'0'+monthFilter;
             try {
                 var fArray = WPQ2ListData.Row.filter(function(el){
-                    return el.Created_x0020_Date.indexOf('-'+monthFilter+'-')>-1;
+                    return el.NewsDate.indexOf('.'+monthFilter+'.')>-1;
                 });
-                $('#scriptWPQ2').find('div.ms-tileview-tile-root').addClass('month-hidden');
+                $('#scriptWPQ2').find('div.last-news-info-text').closest('li').addClass('month-hidden');
                 fArray.forEach(function(el){
-                    $('[id*=Tile_WPQ2_'+el.ID+'_1]').removeClass('month-hidden');
+                    $('#scriptWPQ2').find('div.last-news-info-text:odd:contains(.'+monthFilter+'.)').closest('li').removeClass('month-hidden');
                 });
             }catch(e){
 
