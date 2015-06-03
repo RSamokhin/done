@@ -1,6 +1,7 @@
 # js_nodejs_builder_template - template for frontend development automatisation
 
 * sudo npm install
+* npm install bower -g
 * bower i
 * sudo npm install -g gulp
 
