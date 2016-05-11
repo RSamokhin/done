@@ -1,0 +1,63 @@
+.content {
+    min-width: 820px;
+    max-width: 1000px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    &-row {
+        display: inline-block;
+    }
+    &__panel {
+        width: 48%;
+        display: inline-block;
+        &.m-hidden {
+            visibility: hidden;
+        }
+        &-regim {
+            box-sizing: border-box;
+            height: 200px;
+            & .btn-group {
+                width: 100%;
+                display: block;
+            }
+        }
+        &-solo {
+            box-sizing: border-box;
+            float: right;
+            position: relative;
+            height: 150px;
+        }
+        &-message {
+            float: right;
+            & .message__textarea{
+                letter-spacing: 2px;
+            }
+        }
+        &-button {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+        }
+        &-broadcast {
+            position: relative;
+            padding-bottom: 40px;
+            & .buttons-sex {
+                width: 100%;
+            }
+            & .button-sex {
+                width: 50%;
+            }
+        }
+    }
+
+}
+.show-more {
+    position: absolute;
+    width: 40px;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+

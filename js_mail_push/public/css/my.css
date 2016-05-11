@@ -1,0 +1,49 @@
+.content {
+  min-width: 820px;
+  max-width: 1000px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto; }
+  .content-row {
+    display: inline-block; }
+  .content__panel {
+    width: 48%;
+    display: inline-block; }
+    .content__panel.m-hidden {
+      visibility: hidden; }
+    .content__panel-regim {
+      box-sizing: border-box;
+      height: 200px; }
+      .content__panel-regim .btn-group {
+        width: 100%;
+        display: block; }
+    .content__panel-solo {
+      box-sizing: border-box;
+      float: right;
+      position: relative;
+      height: 150px; }
+    .content__panel-message {
+      float: right; }
+      .content__panel-message .message__textarea {
+        letter-spacing: 2px; }
+    .content__panel-button {
+      position: absolute;
+      right: 10px;
+      bottom: 10px; }
+    .content__panel-broadcast {
+      position: relative;
+      padding-bottom: 40px; }
+      .content__panel-broadcast .buttons-sex {
+        width: 100%; }
+      .content__panel-broadcast .button-sex {
+        width: 50%; }
+
+.show-more {
+  position: absolute;
+  width: 40px;
+  left: 0;
+  right: 0;
+  margin: auto; }
+
+/*# sourceMappingURL=my.css.map */

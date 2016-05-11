@@ -1,0 +1,212 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="./css/bootstrap.min.css">
+        <link rel="stylesheet" href="./css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="./css/type.head.css">
+        <link rel="stylesheet" href="./css/date.time.picker.css">
+        <link rel="stylesheet" href="./css/jquery.emojipicker.css">
+        <link rel="stylesheet" href="./css/jquery.emojipicker.a.css">
+        <link rel="stylesheet" href="./css/my.css">
+        <title>PUSH-уведомления</title>
+    </head>
+    <body>
+
+
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#send" data-toggle="tab">Send PUSH</a></li>
+            <li><a href="#pending" data-toggle="tab">Pending <span class="badge">42</span></a></li>
+            <li><a href="#history" data-toggle="tab">History <span class="badge">52</span></a></li>
+        </ul>
+
+        <br/>
+
+        <div class="tab-content">
+            <div class="tab-pane active" id="send">
+                <div class="content content__panel-send">
+                    <div class="content-row">
+
+                        <div class="panel panel-primary content__panel content__panel-regim">
+                            <div class="panel-heading">Выбор режима</div>
+                            <div class="panel-body">
+                                <div class="list-group">
+                                    <a href="#" class="list-group-item" data-bind-click="toogleRegim" data-regim-target="solo">
+                                        <h4 class="list-group-item-heading">SOLO PUSH</h4>
+                                        <p class="list-group-item-text">Выборка для отправки PUSH</p>
+                                    </a>
+                                    <a href="#" class="list-group-item" data-bind-click="toogleRegim" data-regim-target="broadcast">
+                                        <h4 class="list-group-item-heading">BROADCAST</h4>
+                                        <p class="list-group-item-text">Единичный PUSH</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div data-regim="solo" class="panel panel-info content__panel content__panel-solo m-hidden">
+                            <div class="panel-heading">SOLO Push</div>
+                            <div class="panel-body">
+                                <div class="input-group">
+                                    <span class="input-group-addon">@</span>
+                                    <input type="email" class="form-control" placeholder="Email">
+                                </div>
+                                <button type="button" class="btn btn-info content__panel-button">Отправить</button>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="content-row">
+
+                        <div data-regim="broadcast" class="panel panel-success content__panel content__panel-broadcast m-hidden" >
+                            <div class="panel-heading">BROADCAST PUSH</div>
+                            <div class="panel-body">
+
+                                <div class="input-group">
+                                    <span class="input-group-addon" data-bind-click="togleDisabledInput">
+                                        <input checked type="checkbox">
+                                    </span>
+                                    <input  data-provide="typeahead" data-autocomlete="artist" type="text" class="form-control" placeholder="Артист">
+                                    <input name="artist" style="display: none;">
+                                </div>
+
+                                <br/>
+
+                                <div class="input-group buttons-sex">
+                                    <div class="btn-group buttons-sex" data-toggle="buttons">
+                                        <label class="btn btn-Success button-sex active ">
+                                            <input type="checkbox" autocomplete="off" checked> Мужской
+                                        </label>
+                                        <label class="btn btn-Success button-sex">
+                                            <input type="checkbox" autocomplete="off"> Женский
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <br/>
+
+                                <div class="input-group">
+                                <span class="input-group-addon" data-bind-click="togleDisabledInput">
+                                    <input checked type="checkbox">
+                                </span>
+                                    <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="form-control"  placeholder="Возраст от">
+                                <span class="input-group-addon" data-bind-click="togleDisabledInput">
+                                    <input type="checkbox">
+                                </span>
+                                    <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="form-control" disabled placeholder="Возраст до">
+                                </div>
+
+                                <br/>
+
+                                <div class="form-group">
+                                    <div class='input-group date datepicker' >
+                                        <input type='text' class="form-control" placeholder="Дата и время отправки"/>
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                    </div>
+                                </div>
+
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Жанры">
+                                  <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">Добавить</button>
+                                  </span>
+                                </div>
+
+                                <button type="button" class="btn btn-info content__panel-button">Отправить</button>
+                                <ul class="list-group">
+                                    <li class="list-group-item"><span class="glyphicon glyphicon-minus" aria-hidden="true">&nbsp&nbsp</span>Классическая музыка</li>
+                                    <li class="list-group-item"><span class="glyphicon glyphicon-minus" aria-hidden="true">&nbsp&nbsp</span>Хипхоп</li>
+                                    <li class="list-group-item"><span class="glyphicon glyphicon-minus" aria-hidden="true">&nbsp&nbsp</span>Реп</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-warning content__panel content__panel-message m-hidden">
+                            <div class="panel-heading">Message</div>
+                            <div class="panel-body">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Link</span>
+                                    <input type="text" class="form-control" placeholder="PAID or ARTIST">
+                                </div>
+
+                                <br/>
+
+                                <textarea class="form-control message__textarea" rows="5" id="content__panel-message"></textarea>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="tab-pane" id="pending">
+                <div class="content content-pending">
+                    <div class="panel panel-default">
+                        <!-- Default panel contents -->
+                        <div class="panel-heading">Pending PUSHes</div>
+                        <TABLE class="table">
+                            <TR>
+                                <TH>PUSH ID</TH>
+                                <TH>Target Audience</TH>
+                                <TH>Message</TH>
+                                <TH>Cancel</TH>
+                            </TR>
+                            <TR>
+                                <TD>12345</TD>
+                                <TD>all</TD>
+                                <TD>SOS</TD>
+                                <TD><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></TD>
+                            </TR>
+                            <TR>
+                                <TD>12345</TD>
+                                <TD>r.samokhin@corp.mail.ru</TD>
+                                <TD>MAYDAY MAYDAY</TD>
+                                <TD><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></TD>
+                            </TR>
+                        </TABLE>
+                        <button type="button" class="btn btn-primary show-more">...</button>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="tab-pane" id="history">
+                <div class="content content-history">
+                    <div class="panel panel-default">
+                        <!-- Default panel contents -->
+                        <div class="panel-heading">Pending PUSHes</div>
+                        <TABLE class="table">
+                            <TR>
+                                <TH>PUSH ID</TH>
+                                <TH>Target Audience</TH>
+                                <TH>Message</TH>
+                            </TR>
+                            <TR>
+                                <TD>12345</TD>
+                                <TD>all</TD>
+                                <TD>SOS</TD>
+                            </TR>
+                            <TR>
+                                <TD>12345</TD>
+                                <TD>r.samokhin@corp.mail.ru</TD>
+                                <TD>MAYDAY MAYDAY</TD>
+                            </TR>
+                        </TABLE>
+                        <button type="button" class="btn btn-primary show-more">...</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="./js/jquery.min.js"></script>
+        <script type="text/javascript" src="./js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="./js/type.head.js"></script>
+        <script type="text/javascript" src="./js/moments.js"></script>
+        <script type="text/javascript" src="./js/date.time.picker.js"></script>
+        <script type="text/javascript" src="./js/jquery.emojipicker.js"></script>
+        <script type="text/javascript" src="./js/jquery.emojis.js"></script>
+        <script type="text/javascript" src="./js/my.js"></script>
+    </body>
+</html>
