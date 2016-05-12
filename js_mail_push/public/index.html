@@ -65,11 +65,11 @@
                                     <span class="input-group-addon" data-bind-click="togleDisabledInput">
                                         <input checked type="checkbox">
                                     </span>
-                                    <input  data-provide="typeahead" data-autocomlete="artist" type="text" class="form-control" placeholder="Артист">
+                                    <input  data-provide="typeahead" data-autocomlete="artist" type="text" class="form-control" placeholder="Артисты">
                                     <input name="artist" style="display: none;">
                                 </div>
+                                <ul class="list-group" data-list="artist"></ul>
 
-                                <br/>
 
                                 <div class="input-group buttons-sex">
                                     <div class="btn-group buttons-sex" data-toggle="buttons">
@@ -88,11 +88,11 @@
                                 <span class="input-group-addon" data-bind-click="togleDisabledInput">
                                     <input checked type="checkbox">
                                 </span>
-                                    <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="form-control"  placeholder="Возраст от">
+                                    <input type="number" min="0" step="1" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="form-control"  placeholder="Возраст от">
                                 <span class="input-group-addon" data-bind-click="togleDisabledInput">
                                     <input type="checkbox">
                                 </span>
-                                    <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="form-control" disabled placeholder="Возраст до">
+                                    <input type="number" min="0" step="1" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="form-control" disabled placeholder="Возраст до">
                                 </div>
 
                                 <br/>
@@ -107,18 +107,14 @@
                                 </div>
 
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Жанры">
-                                  <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button">Добавить</button>
-                                  </span>
+                                    <span class="input-group-addon" data-bind-click="togleDisabledInput">
+                                        <input checked type="checkbox">
+                                    </span>
+                                    <input  data-provide="typeahead" data-autocomlete="genres" type="text" class="form-control" placeholder="Жанры">
                                 </div>
+                                <ul class="list-group" data-list="genres"></ul>
 
                                 <button type="button" class="btn btn-info content__panel-button">Отправить</button>
-                                <ul class="list-group">
-                                    <li class="list-group-item"><span class="glyphicon glyphicon-minus" aria-hidden="true">&nbsp&nbsp</span>Классическая музыка</li>
-                                    <li class="list-group-item"><span class="glyphicon glyphicon-minus" aria-hidden="true">&nbsp&nbsp</span>Хипхоп</li>
-                                    <li class="list-group-item"><span class="glyphicon glyphicon-minus" aria-hidden="true">&nbsp&nbsp</span>Реп</li>
-                                </ul>
                             </div>
                         </div>
 
@@ -128,6 +124,13 @@
                                 <div class="input-group">
                                     <span class="input-group-addon">Link</span>
                                     <input type="text" class="form-control" placeholder="PAID or ARTIST">
+                                </div>
+
+                                <br/>
+
+                                <div class="input-group">
+                                    <span class="input-group-addon">Title</span>
+                                    <input type="text" class="form-control" placeholder="PUSH title">
                                 </div>
 
                                 <br/>

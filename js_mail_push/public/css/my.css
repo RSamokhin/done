@@ -46,4 +46,9 @@
   right: 0;
   margin: auto; }
 
+.remove-element {
+  cursor: pointer; }
+  .remove-element:hover {
+    opacity: 0.8; }
+
 /*# sourceMappingURL=my.css.map */

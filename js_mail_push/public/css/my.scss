@@ -59,5 +59,10 @@
     right: 0;
     margin: auto;
 }
-
+.remove-element {
+    cursor: pointer;
+    &:hover {
+        opacity: 0.8;
+    }
+}
 

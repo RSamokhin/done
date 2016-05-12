@@ -29,8 +29,25 @@ window.Handlers = {
                 templates: {
                     suggestion: function (artist) {
                         return $('<p/>').attr({
-                            'data-bind-click': 'transferValue',
-                            'data-transfer-target-selector': '[name=artist]',
+                            'data-parent-input-selector': '[data-autocomlete=artist]',
+                            'data-bind-click': 'addParam',
+                            'data-transfer-target-selector': '[data-list="artist"]',
+                            'data-transfer-value': artist.id
+                        }).text(artist.name)
+                    }
+                }
+            });
+
+            $('[data-autocomlete=genres]').typeahead(null, {
+                name: 'artist',
+                displayKey: 'name',
+                source: artists,
+                templates: {
+                    suggestion: function (artist) {
+                        return $('<p/>').attr({
+                            'data-parent-input-selector': '[data-autocomlete=genres]',
+                            'data-bind-click': 'addParam',
+                            'data-transfer-target-selector': '[data-list="genres"]',
                             'data-transfer-value': artist.id
                         }).text(artist.name)
                     }
@@ -54,6 +71,26 @@ window.Handlers = {
                 $input = $checkBox.next();
             $checkBox.children('input').is(':checked') ? $input.removeProp('disabled') : $input.prop('disabled', true);
 
+        },
+        addParam: function () {
+            var $el = $(this),
+                $targetList = $($el.attr('data-transfer-target-selector'));
+            if (![].some.call($targetList.children(), function (listEl) {
+                    return $(listEl).attr('data-value') === $el.attr('data-transfer-value');
+                })) {
+                $('<li>')
+                    .addClass('list-group-item remove-element')
+                    .attr({
+                        'data-value': $el.attr('data-transfer-value'),
+                        'data-bind-click': 'removeListElement'
+                    })
+                    .html('<span class="glyphicon glyphicon-minus" aria-hidden="true">&nbsp&nbsp</span>' + $el.text())
+                    .prependTo($targetList);
+                $($el.attr('data-parent-input-selector')).val('');
+            }
+        },
+        removeListElement: function () {
+            $(this).remove();
         }
     }
 };
